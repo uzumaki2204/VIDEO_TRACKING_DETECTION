@@ -4,8 +4,8 @@
     "hash": "52582aa5c9fead0bc3169fe07690331b"
   },
   "D:\\yolov8-streamlit-detection-tracking\\config.py": {
-    "mtime": 1778663297.9696412,
-    "hash": "342f025f5ec016a8d59c5422ef20c53d"
+    "mtime": 1778665365.8509228,
+    "hash": "e669dba0a0805278bd417077df8938d4"
   },
   "D:\\yolov8-streamlit-detection-tracking\\image_service.py": {
     "mtime": 1778661667.0863926,
@@ -16,8 +16,8 @@
     "hash": "004bd09dc5b72646faa83ff957d5cc51"
   },
   "D:\\yolov8-streamlit-detection-tracking\\video_service.py": {
-    "mtime": 1778663476.4609568,
-    "hash": "1e9ea3e20e8d610ebd369a3146d8ba47"
+    "mtime": 1778665563.818629,
+    "hash": "8c14be29775f63e1bf0ae661b0a9dcb3"
   },
   "D:\\yolov8-streamlit-detection-tracking\\scripts\\setup_cuda_venv.ps1": {
     "mtime": 1778661667.1229951,
@@ -36,12 +36,16 @@
     "hash": "2b54346c3c882d93b5c5729a127a56c2"
   },
   "D:\\yolov8-streamlit-detection-tracking\\README.md": {
-    "mtime": 1778663488.6816537,
-    "hash": "6ef8730bfec3f16749f6022f0630a4c7"
+    "mtime": 1778665621.8820324,
+    "hash": "68ad25fb391a89959e52ba296b405934"
   },
   "D:\\yolov8-streamlit-detection-tracking\\requirements.txt": {
     "mtime": 1778659045.559675,
     "hash": "d11ea2661ebb82c5a440fb2d9d466839"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\TUTORIAL.MD": {
+    "mtime": 1778665408.826301,
+    "hash": "abba1f5b90110c9cb58c014cac358428"
   },
   "D:\\yolov8-streamlit-detection-tracking\\assets\\pic1.png": {
     "mtime": 1778659045.5436747,

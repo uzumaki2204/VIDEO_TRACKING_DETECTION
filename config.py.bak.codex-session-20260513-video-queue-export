@@ -49,10 +49,6 @@ SOURCE_WEBCAM = "Webcam"
 SOURCE_RTSP = "RTSP Stream"
 SOURCE_YOUTUBE = "YouTube"
 VIDEO_SOURCES = [SOURCE_STORED, SOURCE_WEBCAM, SOURCE_RTSP, SOURCE_YOUTUBE]
-STORED_MODE_SINGLE = "Single Video"
-STORED_MODE_MULTI = "Multi Simultaneous"
-STORED_MODE_QUEUE = "Queue Sequential"
-STORED_VIDEO_MODES = [STORED_MODE_SINGLE, STORED_MODE_MULTI, STORED_MODE_QUEUE]
 
 # ─── Compute Device ──────────────────────────────────────────────────────────
 DEVICE_AUTO = "auto"
@@ -170,7 +166,6 @@ MAX_SKIP_FRAMES = 8
 TRACKER_BYTETRACK = "bytetrack.yaml"
 TRACKER_BOTSORT = "botsort.yaml"
 TRACKERS_LIST = [TRACKER_BYTETRACK, TRACKER_BOTSORT]
-TRACK_GROUP_GAP_MS = 1000
 
 # ─── YOLO World v2 Defaults ───────────────────────────────────────────────────
 # Supports natural language prompts like "person in black", "red car", etc.

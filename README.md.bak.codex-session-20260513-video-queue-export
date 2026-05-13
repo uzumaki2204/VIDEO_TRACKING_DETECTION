@@ -158,7 +158,6 @@ The app opens at **http://localhost:8501**.
 3. **Compute Device** — Choose **Auto (prefer GPU)**, **CPU**, or **GPU (cuda:0)**
 4. **Model Confidence** — Adjust the confidence threshold (10–100%)
 5. **Performance** — In video mode, tune **Inference Size**, **FP16 Inference**, and **UI Refresh Every N Processed Frames** to push more work to the GPU
-6. **Stored Video Execution** — In stored-video mode, choose **Single Video**, **Multi Simultaneous**, or **Queue Sequential**
 
 ### Image Inference
 
@@ -177,11 +176,8 @@ The app opens at **http://localhost:8501**.
 5. Adjust **Skip Frames** (1–8) in the sidebar for faster inference on long videos
 6. For the highest GPU utilization, increase **Inference Size**, keep **FP16 Inference** enabled, and raise **UI Refresh Every N Processed Frames**
 7. For pure detection throughput, disable **Object Tracking** because tracking and live overlays still use CPU
-8. In **Stored Video** mode, use **Queue Sequential** to process multiple selected videos one after another
-9. During detection, the sidebar shows **Elapsed Detect Time**, **Current Video Time**, and **Video Progress**
-10. When tracking is enabled in **Single Video** or **Queue Sequential**, export combined CSV results with raw tracking rows and grouped start/end time segments
-11. For **YOLO World v2**: enter natural language prompts to search for in the video
-12. Click **🚀 Detect** — local and global metrics appear in the sidebar
+8. For **YOLO World v2**: enter natural language prompts to search for in the video
+9. Click **🚀 Detect** — local and global metrics appear in the sidebar
 
 ### Adding Your Own Videos
 

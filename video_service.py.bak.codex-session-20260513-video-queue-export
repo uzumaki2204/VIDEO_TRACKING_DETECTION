@@ -13,15 +13,12 @@ Features
 
 from __future__ import annotations
 
-import csv
 import time
-from collections import Counter, defaultdict
+from collections import defaultdict
 from dataclasses import dataclass
-from io import StringIO
 
 import cv2
 import numpy as np
-import pandas as pd
 import streamlit as st
 import yt_dlp
 
@@ -61,66 +58,6 @@ class _PerformanceOptions:
     imgsz: int
     half: bool
     ui_update_interval: int
-
-
-@dataclass(frozen=True)
-class _TrackObservation:
-    track_id: int
-    class_name: str
-    confidence: float
-
-
-@dataclass(frozen=True)
-class _TrackingEvent:
-    video_name: str
-    queue_index: int
-    track_id: int
-    class_name: str
-    confidence: float
-    frame_num: int
-    image_id: str
-    timestamp_ms: int
-    timestamp_text: str
-
-
-@dataclass(frozen=True)
-class _TrackingSegment:
-    video_name: str
-    queue_index: int
-    track_id: int
-    class_name: str
-    start_frame: int
-    end_frame: int
-    image_id_start: str
-    image_id_end: str
-    start_time_ms: int
-    end_time_ms: int
-    start_time_text: str
-    end_time_text: str
-    duration_ms: int
-    duration_text: str
-    hits: int
-
-
-@dataclass(frozen=True)
-class _CaptureTimingMeta:
-    fps: float | None
-    total_frames: int | None
-    duration_ms: int | None
-
-
-@dataclass(frozen=True)
-class _VideoRunResult:
-    video_name: str
-    queue_index: int
-    queue_total: int
-    frames_read: int
-    processed_frames: int
-    skipped_frames: int
-    raw_events: list[_TrackingEvent]
-    grouped_segments: list[_TrackingSegment]
-    unique_track_count: int
-    error: str | None = None
 
 
 # ── Custom annotation with track IDs on bounding boxes ───────────────────────
@@ -280,330 +217,6 @@ def _performance_options(device: str) -> _PerformanceOptions:
     )
 
 
-def _format_timestamp_ms(value_ms: int | float | None, show_millis: bool = True) -> str:
-    """Format milliseconds as ``HH:MM:SS.mmm`` or ``HH:MM:SS``."""
-    if value_ms is None or value_ms < 0:
-        return "—"
-
-    total_ms = int(round(value_ms))
-    hours, rem_ms = divmod(total_ms, 3_600_000)
-    minutes, rem_ms = divmod(rem_ms, 60_000)
-    seconds, millis = divmod(rem_ms, 1000)
-    if show_millis:
-        return f"{hours:02d}:{minutes:02d}:{seconds:02d}.{millis:03d}"
-    return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
-
-
-def _format_elapsed_seconds(seconds: float) -> str:
-    return _format_timestamp_ms(max(seconds, 0.0) * 1000, show_millis=False)
-
-
-def _format_progress(progress: float | None) -> str:
-    if progress is None:
-        return "—"
-    return f"{progress * 100:.1f}%"
-
-
-def _capture_timing_meta(vid_cap: cv2.VideoCapture) -> _CaptureTimingMeta:
-    """Read FPS / frame count metadata once for timeline calculations."""
-    fps = vid_cap.get(cv2.CAP_PROP_FPS)
-    fps = fps if fps and fps > 0 else None
-
-    total_frames = int(vid_cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
-    total_frames = total_frames if total_frames > 0 else None
-
-    duration_ms = None
-    if fps and total_frames:
-        duration_ms = int(round((total_frames / fps) * 1000))
-
-    return _CaptureTimingMeta(fps=fps, total_frames=total_frames, duration_ms=duration_ms)
-
-
-def _current_video_ms(
-    vid_cap: cv2.VideoCapture,
-    meta: _CaptureTimingMeta,
-    frame_num: int,
-) -> int | None:
-    """Return the current video position in milliseconds."""
-    pos_ms = vid_cap.get(cv2.CAP_PROP_POS_MSEC)
-    if pos_ms and pos_ms > 0:
-        return int(round(pos_ms))
-    if meta.fps:
-        return int(round((frame_num / meta.fps) * 1000))
-    return None
-
-
-def _video_progress(current_ms: int | None, meta: _CaptureTimingMeta) -> float | None:
-    if current_ms is None or meta.duration_ms is None or meta.duration_ms <= 0:
-        return None
-    return min(max(current_ms / meta.duration_ms, 0.0), 1.0)
-
-
-def _image_id(video_name: str, frame_num: int) -> str:
-    return f"{video_name}:{frame_num:06d}"
-
-
-def _build_tracking_events(
-    observations: list[_TrackObservation],
-    video_name: str,
-    queue_index: int,
-    frame_num: int,
-    timestamp_ms: int | None,
-) -> list[_TrackingEvent]:
-    """Attach video/frame/timestamp metadata to raw tracking observations."""
-    if not observations:
-        return []
-
-    safe_timestamp_ms = int(timestamp_ms or 0)
-    timestamp_text = _format_timestamp_ms(safe_timestamp_ms)
-    image_id = _image_id(video_name, frame_num)
-    return [
-        _TrackingEvent(
-            video_name=video_name,
-            queue_index=queue_index,
-            track_id=obs.track_id,
-            class_name=obs.class_name,
-            confidence=obs.confidence,
-            frame_num=frame_num,
-            image_id=image_id,
-            timestamp_ms=safe_timestamp_ms,
-            timestamp_text=timestamp_text,
-        )
-        for obs in observations
-    ]
-
-
-def _finalize_segment(events: list[_TrackingEvent]) -> _TrackingSegment:
-    """Create one grouped segment from consecutive raw tracking events."""
-    start = events[0]
-    end = events[-1]
-    majority_class = Counter(event.class_name for event in events).most_common(1)[0][0]
-    duration_ms = max(0, end.timestamp_ms - start.timestamp_ms)
-    return _TrackingSegment(
-        video_name=start.video_name,
-        queue_index=start.queue_index,
-        track_id=start.track_id,
-        class_name=majority_class,
-        start_frame=start.frame_num,
-        end_frame=end.frame_num,
-        image_id_start=start.image_id,
-        image_id_end=end.image_id,
-        start_time_ms=start.timestamp_ms,
-        end_time_ms=end.timestamp_ms,
-        start_time_text=start.timestamp_text,
-        end_time_text=end.timestamp_text,
-        duration_ms=duration_ms,
-        duration_text=_format_timestamp_ms(duration_ms),
-        hits=len(events),
-    )
-
-
-def _group_tracking_events(events: list[_TrackingEvent]) -> list[_TrackingSegment]:
-    """Group raw events into continuous track segments using the configured gap."""
-    grouped: list[_TrackingSegment] = []
-    events_by_track: dict[tuple[str, int, int], list[_TrackingEvent]] = defaultdict(list)
-    for event in events:
-        events_by_track[(event.video_name, event.queue_index, event.track_id)].append(event)
-
-    for track_events in events_by_track.values():
-        ordered = sorted(track_events, key=lambda item: (item.timestamp_ms, item.frame_num))
-        current_segment = [ordered[0]]
-
-        for event in ordered[1:]:
-            prev = current_segment[-1]
-            if event.timestamp_ms - prev.timestamp_ms <= config.TRACK_GROUP_GAP_MS:
-                current_segment.append(event)
-            else:
-                grouped.append(_finalize_segment(current_segment))
-                current_segment = [event]
-
-        grouped.append(_finalize_segment(current_segment))
-
-    return sorted(grouped, key=lambda item: (item.queue_index, item.start_time_ms, item.track_id))
-
-
-def _result_export_rows(result: _VideoRunResult) -> list[dict[str, str | int | float]]:
-    """Flatten one video run result into combined raw + grouped CSV rows."""
-    rows: list[dict[str, str | int | float]] = []
-
-    for event in result.raw_events:
-        rows.append(
-            {
-                "row_type": "raw",
-                "video_name": event.video_name,
-                "queue_index": event.queue_index,
-                "track_id": event.track_id,
-                "class_name": event.class_name,
-                "confidence": round(event.confidence, 6),
-                "frame_num": event.frame_num,
-                "image_id": event.image_id,
-                "timestamp_ms": event.timestamp_ms,
-                "timestamp_text": event.timestamp_text,
-                "start_frame": "",
-                "end_frame": "",
-                "image_id_start": "",
-                "image_id_end": "",
-                "start_time_ms": "",
-                "end_time_ms": "",
-                "start_time_text": "",
-                "end_time_text": "",
-                "duration_ms": "",
-                "duration_text": "",
-                "hits": "",
-            }
-        )
-
-    for segment in result.grouped_segments:
-        rows.append(
-            {
-                "row_type": "grouped",
-                "video_name": segment.video_name,
-                "queue_index": segment.queue_index,
-                "track_id": segment.track_id,
-                "class_name": segment.class_name,
-                "confidence": "",
-                "frame_num": "",
-                "image_id": "",
-                "timestamp_ms": "",
-                "timestamp_text": "",
-                "start_frame": segment.start_frame,
-                "end_frame": segment.end_frame,
-                "image_id_start": segment.image_id_start,
-                "image_id_end": segment.image_id_end,
-                "start_time_ms": segment.start_time_ms,
-                "end_time_ms": segment.end_time_ms,
-                "start_time_text": segment.start_time_text,
-                "end_time_text": segment.end_time_text,
-                "duration_ms": segment.duration_ms,
-                "duration_text": segment.duration_text,
-                "hits": segment.hits,
-            }
-        )
-
-    return rows
-
-
-def _results_export_rows(results: list[_VideoRunResult]) -> list[dict[str, str | int | float]]:
-    rows: list[dict[str, str | int | float]] = []
-    for result in results:
-        rows.extend(_result_export_rows(result))
-    return rows
-
-
-def _rows_to_csv(rows: list[dict[str, str | int | float]]) -> str:
-    """Serialize export rows to CSV text."""
-    fieldnames = [
-        "row_type",
-        "video_name",
-        "queue_index",
-        "track_id",
-        "class_name",
-        "confidence",
-        "frame_num",
-        "image_id",
-        "timestamp_ms",
-        "timestamp_text",
-        "start_frame",
-        "end_frame",
-        "image_id_start",
-        "image_id_end",
-        "start_time_ms",
-        "end_time_ms",
-        "start_time_text",
-        "end_time_text",
-        "duration_ms",
-        "duration_text",
-        "hits",
-    ]
-    buffer = StringIO()
-    writer = csv.DictWriter(buffer, fieldnames=fieldnames)
-    writer.writeheader()
-    writer.writerows(rows)
-    return buffer.getvalue()
-
-
-def _render_tracking_exports(results: list[_VideoRunResult], enable_tracking: bool) -> None:
-    """Show CSV downloads and preview tables for stored-video tracking runs."""
-    if not enable_tracking:
-        st.info("Tracking export requires `Enable Object Tracking`.")
-        return
-
-    successful = [result for result in results if result.error is None]
-    total_raw = sum(len(result.raw_events) for result in successful)
-    total_grouped = sum(len(result.grouped_segments) for result in successful)
-
-    if not successful or total_raw == 0:
-        st.warning("No tracking events were recorded to export.")
-        return
-
-    all_rows = _results_export_rows(successful)
-    all_csv = _rows_to_csv(all_rows)
-
-    grouped_preview_rows = [
-        {
-            "video_name": segment.video_name,
-            "queue_index": segment.queue_index,
-            "track_id": segment.track_id,
-            "class_name": segment.class_name,
-            "start_time": segment.start_time_text,
-            "end_time": segment.end_time_text,
-            "duration": segment.duration_text,
-            "start_frame": segment.start_frame,
-            "end_frame": segment.end_frame,
-            "image_id_start": segment.image_id_start,
-            "image_id_end": segment.image_id_end,
-            "hits": segment.hits,
-        }
-        for result in successful
-        for segment in result.grouped_segments
-    ]
-    raw_preview_rows = [
-        {
-            "video_name": event.video_name,
-            "queue_index": event.queue_index,
-            "track_id": event.track_id,
-            "class_name": event.class_name,
-            "confidence": event.confidence,
-            "frame_num": event.frame_num,
-            "image_id": event.image_id,
-            "timestamp": event.timestamp_text,
-        }
-        for result in successful
-        for event in result.raw_events
-    ]
-
-    with st.expander("📦 Tracking Export", expanded=True):
-        metric_cols = st.columns(3)
-        metric_cols[0].metric("Videos Exported", len(successful))
-        metric_cols[1].metric("Raw Rows", total_raw)
-        metric_cols[2].metric("Grouped Segments", total_grouped)
-
-        st.download_button(
-            "⬇️ Download All Tracking CSV",
-            data=all_csv,
-            file_name="tracking_results_all_videos.csv",
-            mime="text/csv",
-            key="download_tracking_all_csv",
-        )
-
-        for result in successful:
-            if not result.raw_events and not result.grouped_segments:
-                continue
-            st.download_button(
-                f"⬇️ Download {result.video_name} CSV",
-                data=_rows_to_csv(_result_export_rows(result)),
-                file_name=f"tracking_{result.video_name}.csv",
-                mime="text/csv",
-                key=f"download_tracking_{result.queue_index}_{result.video_name}",
-            )
-
-        st.markdown("**Grouped Preview**")
-        st.dataframe(pd.DataFrame(grouped_preview_rows), width="stretch")
-
-        st.markdown("**Raw Preview**")
-        st.dataframe(pd.DataFrame(raw_preview_rows[:200]), width="stretch")
-
-
 # ── Public API ────────────────────────────────────────────────────────────────
 
 
@@ -748,7 +361,7 @@ def _process_frame(
     tracked_ids: set[int],
     class_tracked: dict[str, set[int]],
     render_output: bool = True,
-) -> tuple[np.ndarray | None, int, dict[str, int], list[_TrackObservation]]:
+) -> tuple[np.ndarray | None, int, dict[str, int]]:
     """Run inference on a single frame.
 
     Returns ``(annotated_frame, object_count, per_class_counts)``.
@@ -777,12 +390,10 @@ def _process_frame(
     result = results[0]
     frame_obj_count = 0
     frame_class_counts: dict[str, int] = {}
-    observations: list[_TrackObservation] = []
 
     if result.boxes is not None and len(result.boxes):
         names = result.names
         classes = result.boxes.cls.cpu().numpy()
-        confs = result.boxes.conf.cpu().numpy()
         frame_obj_count = len(classes)
 
         for cls_id in classes:
@@ -792,20 +403,13 @@ def _process_frame(
         # Accumulate unique tracked IDs
         if enable_tracking and result.boxes.id is not None:
             ids = result.boxes.id.cpu().numpy()
-            for track_id, cls_id, conf in zip(ids, classes, confs):
+            for track_id, cls_id in zip(ids, classes):
                 tracked_ids.add(int(track_id))
                 name = names[int(cls_id)]
                 class_tracked.setdefault(name, set()).add(int(track_id))
-                observations.append(
-                    _TrackObservation(
-                        track_id=int(track_id),
-                        class_name=name,
-                        confidence=float(conf),
-                    )
-                )
 
     if not render_output:
-        return None, frame_obj_count, frame_class_counts, observations
+        return None, frame_obj_count, frame_class_counts
 
     # Custom annotation with track IDs on bounding boxes
     annotated = _annotate_with_ids(frame, result, enable_tracking)
@@ -819,7 +423,7 @@ def _process_frame(
         class_tracked if enable_tracking else None,
     )
     annotated = _resize_for_display(annotated)
-    return annotated, frame_obj_count, frame_class_counts, observations
+    return annotated, frame_obj_count, frame_class_counts
 
 
 def _draw_overlay(
@@ -891,10 +495,6 @@ class _LiveMetrics:
         self.enable_tracking = enable_tracking
         with self.container:
             st.subheader("📈 Live Metrics")
-            self._video_ph = st.empty()
-            self._elapsed_ph = st.empty()
-            self._video_time_ph = st.empty()
-            self._progress_ph = st.empty()
             self._frame_ph = st.empty()
             self._fps_ph = st.empty()
             st.markdown("**🟢 Local (this frame)**")
@@ -913,22 +513,7 @@ class _LiveMetrics:
         tracked_total: int,
         class_tracked: dict[str, set[int]],
         fps: float,
-        elapsed_detect_s: float,
-        current_video_ms: int | None,
-        progress: float | None,
-        video_name: str,
-        queue_index: int,
-        queue_total: int,
     ):
-        if queue_total > 1:
-            self._video_ph.markdown(
-                f"**Queue** {queue_index}/{queue_total} · **Video** `{video_name}`"
-            )
-        else:
-            self._video_ph.markdown(f"**Video** `{video_name}`")
-        self._elapsed_ph.metric("Elapsed Detect Time", _format_elapsed_seconds(elapsed_detect_s))
-        self._video_time_ph.metric("Current Video Time", _format_timestamp_ms(current_video_ms))
-        self._progress_ph.metric("Video Progress", _format_progress(progress))
         self._frame_ph.metric("Frame", frame_num)
         self._fps_ph.metric("FPS", f"{fps:.1f}")
         self._objects_ph.metric("Objects in Frame", frame_obj_count)
@@ -953,41 +538,21 @@ def _run_video_loop(
     perf: _PerformanceOptions,
     enable_tracking: bool,
     tracker: str | None,
-    video_name: str,
-    queue_index: int = 1,
-    queue_total: int = 1,
-    run_started_at: float | None = None,
-    metrics: _LiveMetrics | None = None,
-    st_frame=None,
     skip_frames: int = 1,
-) -> _VideoRunResult:
+) -> None:
     """Common processing loop for any ``cv2.VideoCapture`` source."""
     if not vid_cap.isOpened():
         st.error("❌ Could not open video source.")
-        return _VideoRunResult(
-            video_name=video_name,
-            queue_index=queue_index,
-            queue_total=queue_total,
-            frames_read=0,
-            processed_frames=0,
-            skipped_frames=0,
-            raw_events=[],
-            grouped_segments=[],
-            unique_track_count=0,
-            error="Could not open video source.",
-        )
+        return
 
-    metrics = metrics or _LiveMetrics(enable_tracking)
-    st_frame = st_frame or st.empty()
+    metrics = _LiveMetrics(enable_tracking)
+    st_frame = st.empty()
     tracked_ids: set[int] = set()
     class_tracked: dict[str, set[int]] = defaultdict(set)
-    raw_events: list[_TrackingEvent] = []
     frame_num = 0
     processed = 0
-    run_started = run_started_at or time.time()
     prev_time = time.time()
     last_bytes: bytes | None = None
-    timing_meta = _capture_timing_meta(vid_cap)
 
     try:
         while vid_cap.isOpened():
@@ -1007,8 +572,7 @@ def _run_video_loop(
                 processed == 1 or processed % perf.ui_update_interval == 0
             )
 
-            current_video_ms = _current_video_ms(vid_cap, timing_meta, frame_num)
-            annotated, obj_count, cls_counts, observations = _process_frame(
+            annotated, obj_count, cls_counts = _process_frame(
                 model,
                 frame,
                 confidence,
@@ -1019,15 +583,6 @@ def _run_video_loop(
                 tracked_ids,
                 class_tracked,
                 render_output=should_render,
-            )
-            raw_events.extend(
-                _build_tracking_events(
-                    observations,
-                    video_name=video_name,
-                    queue_index=queue_index,
-                    frame_num=frame_num,
-                    timestamp_ms=current_video_ms,
-                )
             )
 
             if annotated is not None:
@@ -1046,12 +601,6 @@ def _run_video_loop(
                     len(tracked_ids),
                     class_tracked,
                     fps,
-                    elapsed_detect_s=now - run_started,
-                    current_video_ms=current_video_ms,
-                    progress=_video_progress(current_video_ms, timing_meta),
-                    video_name=video_name,
-                    queue_index=queue_index,
-                    queue_total=queue_total,
                 )
     finally:
         vid_cap.release()
@@ -1064,7 +613,7 @@ def _run_video_loop(
 
     if enable_tracking and tracked_ids:
         st.success(
-            f"✅ **{video_name}** · {' · '.join(summary_parts)} — "
+            f"✅ {' · '.join(summary_parts)} — "
             f"**{len(tracked_ids)}** unique objects tracked"
         )
         with st.expander("📊 Tracking Summary", expanded=True):
@@ -1072,20 +621,7 @@ def _run_video_loop(
             for idx, (name, ids) in enumerate(class_tracked.items()):
                 cols[idx % len(cols)].metric(name.capitalize(), len(ids))
     else:
-        st.success(f"✅ **{video_name}** · {' · '.join(summary_parts)}")
-
-    grouped_segments = _group_tracking_events(raw_events)
-    return _VideoRunResult(
-        video_name=video_name,
-        queue_index=queue_index,
-        queue_total=queue_total,
-        frames_read=frame_num,
-        processed_frames=processed,
-        skipped_frames=skipped,
-        raw_events=raw_events,
-        grouped_segments=grouped_segments,
-        unique_track_count=len(tracked_ids),
-    )
+        st.success(f"✅ {' · '.join(summary_parts)}")
 
 
 # ── Multi-video simultaneous loop ────────────────────────────────────────────
@@ -1172,7 +708,7 @@ def _run_multi_video_loop(
                     or processed_counts[i] % perf.ui_update_interval == 0
                 )
 
-                annotated, obj_count, cls_counts, _ = _process_frame(
+                annotated, obj_count, cls_counts = _process_frame(
                     models[i],
                     frame,
                     confidence,
@@ -1212,60 +748,6 @@ def _run_multi_video_loop(
         )
 
 
-def _run_video_queue(
-    vid_names: list[str],
-    videos: dict[str, object],
-    confidence: float,
-    device: str,
-    perf: _PerformanceOptions,
-    enable_tracking: bool,
-    tracker: str | None,
-    skip_frames: int,
-    task: str,
-    world_classes: list[str] | None,
-    selected_model: str | None = None,
-) -> list[_VideoRunResult]:
-    """Run stored videos sequentially and collect exportable tracking results."""
-    results: list[_VideoRunResult] = []
-    run_started_at = time.time()
-    queue_total = len(vid_names)
-    shared_frame = st.empty()
-    shared_metrics = _LiveMetrics(enable_tracking)
-
-    for queue_index, name in enumerate(vid_names, start=1):
-        model = load_fresh_model(
-            task,
-            world_classes,
-            model_name=selected_model,
-            device=device,
-        )
-        vid_cap = cv2.VideoCapture(str(videos[name]))
-        result = _run_video_loop(
-            vid_cap,
-            model,
-            confidence,
-            device,
-            perf,
-            enable_tracking,
-            tracker,
-            video_name=name,
-            queue_index=queue_index,
-            queue_total=queue_total,
-            run_started_at=run_started_at,
-            metrics=shared_metrics,
-            st_frame=shared_frame,
-            skip_frames=skip_frames,
-        )
-        results.append(result)
-
-    ok_count = sum(1 for result in results if result.error is None)
-    st.success(f"✅ Queue complete: **{ok_count}/{queue_total}** video(s) processed")
-    failed = [result.video_name for result in results if result.error]
-    if failed:
-        st.warning(f"Skipped or failed videos: {', '.join(failed)}")
-    return results
-
-
 # ── Source handlers ──────────────────────────────────────────────────────────
 
 
@@ -1294,16 +776,6 @@ def _play_stored_video(
         default=[list(videos.keys())[0]],
         help="Select multiple videos for simultaneous detection.",
     )
-    execution_mode = st.sidebar.radio(
-        "Stored Video Execution",
-        config.STORED_VIDEO_MODES,
-        index=0,
-        help=(
-            "Single Video = one file. Multi Simultaneous = side-by-side. "
-            "Queue Sequential = process selected videos one after another."
-        ),
-        key="stored_video_execution_mode",
-    )
 
     if not vid_names:
         st.info("Select at least one video from the sidebar.")
@@ -1320,54 +792,16 @@ def _play_stored_video(
                 st.video(str(videos[name]))
 
     if st.sidebar.button("🚀 Detect Video Objects", type="primary"):
-        runtime_perf = perf or _performance_options(device)
-
-        if execution_mode == config.STORED_MODE_SINGLE:
-            if len(vid_names) != 1:
-                st.sidebar.error("Single Video mode requires exactly one selected video.")
-                return
-            result = _run_video_loop(
-                cv2.VideoCapture(str(videos[vid_names[0]])),
-                model,
-                confidence,
-                device,
-                runtime_perf,
-                enable_tracking,
-                tracker,
-                video_name=vid_names[0],
-                skip_frames=skip_frames,
-            )
-            _render_tracking_exports([result], enable_tracking)
-            return
-
-        if execution_mode == config.STORED_MODE_QUEUE:
-            results = _run_video_queue(
-                vid_names,
-                videos,
-                confidence,
-                device,
-                runtime_perf,
-                enable_tracking,
-                tracker,
-                skip_frames,
-                task,
-                world_classes,
-                selected_model,
-            )
-            _render_tracking_exports(results, enable_tracking)
-            return
-
         if len(vid_names) == 1:
             _run_video_loop(
                 cv2.VideoCapture(str(videos[vid_names[0]])),
                 model,
                 confidence,
                 device,
-                runtime_perf,
+                perf or _performance_options(device),
                 enable_tracking,
                 tracker,
-                video_name=vid_names[0],
-                skip_frames=skip_frames,
+                skip_frames,
             )
         else:
             _run_multi_video_loop(
@@ -1375,17 +809,13 @@ def _play_stored_video(
                 videos,
                 confidence,
                 device,
-                runtime_perf,
+                perf or _performance_options(device),
                 enable_tracking,
                 tracker,
                 skip_frames,
                 task,
                 world_classes,
                 selected_model,
-            )
-            st.info(
-                "Tracking export and grouped time ranges are available in Single Video "
-                "or Queue Sequential mode."
             )
 
 
@@ -1535,8 +965,7 @@ def _play_rtsp(
             perf or _performance_options(device),
             enable_tracking,
             tracker,
-            video_name="RTSP Stream",
-            skip_frames=skip_frames,
+            skip_frames,
         )
 
 
@@ -1571,8 +1000,7 @@ def _play_youtube(
                 perf or _performance_options(device),
                 enable_tracking,
                 tracker,
-                video_name="YouTube Stream",
-                skip_frames=skip_frames,
+                skip_frames,
             )
         except Exception as exc:
             st.sidebar.error(f"YouTube error: {exc}")
