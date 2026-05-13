@@ -1,0 +1,86 @@
+{
+  "D:\\yolov8-streamlit-detection-tracking\\app.py": {
+    "mtime": 1778661667.0853949,
+    "hash": "52582aa5c9fead0bc3169fe07690331b"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\config.py": {
+    "mtime": 1778663297.9696412,
+    "hash": "342f025f5ec016a8d59c5422ef20c53d"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\image_service.py": {
+    "mtime": 1778661667.0863926,
+    "hash": "13e957dbb054dd68f361d6aece616861"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\model_loader.py": {
+    "mtime": 1778663306.774878,
+    "hash": "004bd09dc5b72646faa83ff957d5cc51"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\video_service.py": {
+    "mtime": 1778663476.4609568,
+    "hash": "1e9ea3e20e8d610ebd369a3146d8ba47"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\scripts\\setup_cuda_venv.ps1": {
+    "mtime": 1778661667.1229951,
+    "hash": "8d0ef97c257538f91460405c6542df1f"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\scripts\\verify_torch_cuda.py": {
+    "mtime": 1778661667.1229951,
+    "hash": "68432bc347be051b6074fb6678c5b7ef"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\AGENTS.md": {
+    "mtime": 1778660819.5831337,
+    "hash": "2ed67c68f28bc1ef95ac24167431d7e8"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\packages.txt": {
+    "mtime": 1778659045.559675,
+    "hash": "2b54346c3c882d93b5c5729a127a56c2"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\README.md": {
+    "mtime": 1778663488.6816537,
+    "hash": "6ef8730bfec3f16749f6022f0630a4c7"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\requirements.txt": {
+    "mtime": 1778659045.559675,
+    "hash": "d11ea2661ebb82c5a440fb2d9d466839"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\assets\\pic1.png": {
+    "mtime": 1778659045.5436747,
+    "hash": "acd65835c65c17914fa86caa324174d7"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\assets\\pic3.png": {
+    "mtime": 1778659045.5477576,
+    "hash": "4af7c3f2bc9cb2c881f4b57fbec2a5a8"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\assets\\segmentation.png": {
+    "mtime": 1778659045.5517554,
+    "hash": "f83b1cdbbd987939c7597dcc7cde8cf7"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\images\\office_4.jpg": {
+    "mtime": 1778659045.5566747,
+    "hash": "7f726e5770f04e684f882dcc2d200df5"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\images\\office_4_detected.jpg": {
+    "mtime": 1778659045.5586736,
+    "hash": "16669474f4376e730163d2b144930561"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\assets\\Objdetectionyoutubegif-1.m4v": {
+    "mtime": 1778659045.538679,
+    "hash": "f89e90ab6eca1c555c5065788e8c3ea8"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\videos\\Scan_and_Pack.mp4": {
+    "mtime": 1778562614.7120087,
+    "hash": "bb7b1cb8f308df6e08667b2a0040051a"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\videos\\video_1.mp4": {
+    "mtime": 1778659045.6096938,
+    "hash": "81f8625f233b985878ab4a9f08f26e8e"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\videos\\video_2.mp4": {
+    "mtime": 1778659045.6692443,
+    "hash": "f19d4aa8fc2b4c48e8e90ff1c2f9d490"
+  },
+  "D:\\yolov8-streamlit-detection-tracking\\videos\\video_3.mp4": {
+    "mtime": 1778659045.6732442,
+    "hash": "e07823dde1f6be1d4b863719eeeb6915"
+  }
+}

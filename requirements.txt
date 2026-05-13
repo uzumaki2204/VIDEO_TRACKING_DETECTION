@@ -1,0 +1,15 @@
+# ── Core ──────────────────────────────────────────────
+ultralytics>=8.4.13
+streamlit>=1.54.0
+opencv-python>=4.13.0.92
+
+# ── Data & Visualization ─────────────────────────────
+numpy>=1.26.0
+pandas>=2.1.0
+Pillow>=10.0.0
+
+# ── Video Sources ─────────────────────────────────────
+yt-dlp==2026.2.4
+
+# ── Tracking (pulled by ultralytics, pinned for clarity)
+lapx>=0.5.0

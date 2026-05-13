@@ -1,0 +1,4076 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "app.py",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L1",
+      "id": "app_py",
+      "community": 9,
+      "norm_label": "app.py"
+    },
+    {
+      "label": "YOLO Vision Studio \u2014 Main Application ====================================== R",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L1",
+      "id": "yolov8_streamlit_detection_tracking_app_rationale_1",
+      "community": 9,
+      "norm_label": "yolo vision studio \u2014 main application ====================================== r"
+    },
+    {
+      "label": "config.py",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "L1",
+      "id": "config_py",
+      "community": 3,
+      "norm_label": "config.py"
+    },
+    {
+      "label": "get_videos_dict()",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "L128",
+      "id": "yolov8_streamlit_detection_tracking_config_get_videos_dict",
+      "community": 3,
+      "norm_label": "get_videos_dict()"
+    },
+    {
+      "label": "resolve_model_path()",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "L180",
+      "id": "yolov8_streamlit_detection_tracking_config_resolve_model_path",
+      "community": 3,
+      "norm_label": "resolve_model_path()"
+    },
+    {
+      "label": "sweep_stray_weights()",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "L198",
+      "id": "yolov8_streamlit_detection_tracking_config_sweep_stray_weights",
+      "community": 3,
+      "norm_label": "sweep_stray_weights()"
+    },
+    {
+      "label": "get_model_catalog()",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "L206",
+      "id": "yolov8_streamlit_detection_tracking_config_get_model_catalog",
+      "community": 3,
+      "norm_label": "get_model_catalog()"
+    },
+    {
+      "label": "get_device_catalog()",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "L218",
+      "id": "yolov8_streamlit_detection_tracking_config_get_device_catalog",
+      "community": 3,
+      "norm_label": "get_device_catalog()"
+    },
+    {
+      "label": "Configuration hub for YOLO Vision Studio. All paths, model configs, UI settings",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L1",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_1",
+      "community": 3,
+      "norm_label": "configuration hub for yolo vision studio. all paths, model configs, ui settings"
+    },
+    {
+      "label": "Scan ``videos/`` directory each time so newly added files appear.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L129",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_129",
+      "community": 3,
+      "norm_label": "scan ``videos/`` directory each time so newly added files appear."
+    },
+    {
+      "label": "Return local weights path if it exists, else the bare name for auto-download.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L181",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_181",
+      "community": 3,
+      "norm_label": "return local weights path if it exists, else the bare name for auto-download."
+    },
+    {
+      "label": "Move any ``.pt`` files from the project root into ``weights/``.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L199",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_199",
+      "community": 3,
+      "norm_label": "move any ``.pt`` files from the project root into ``weights/``."
+    },
+    {
+      "label": "Return ``{display_label: filename}`` for the given *task*.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L207",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_207",
+      "community": 3,
+      "norm_label": "return ``{display_label: filename}`` for the given *task*."
+    },
+    {
+      "label": "Return ``{display_label: device_value}`` for the device selector.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L219",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_219",
+      "community": 3,
+      "norm_label": "return ``{display_label: device_value}`` for the device selector."
+    },
+    {
+      "label": "image_service.py",
+      "file_type": "code",
+      "source_file": "image_service.py",
+      "source_location": "L1",
+      "id": "image_service_py",
+      "community": 5,
+      "norm_label": "image_service.py"
+    },
+    {
+      "label": "render()",
+      "file_type": "code",
+      "source_file": "image_service.py",
+      "source_location": "L20",
+      "id": "yolov8_streamlit_detection_tracking_image_service_render",
+      "community": 5,
+      "norm_label": "render()"
+    },
+    {
+      "label": "_yoloe_class_input()",
+      "file_type": "code",
+      "source_file": "image_service.py",
+      "source_location": "L84",
+      "id": "yolov8_streamlit_detection_tracking_image_service_yoloe_class_input",
+      "community": 5,
+      "norm_label": "_yoloe_class_input()"
+    },
+    {
+      "label": "_world_class_input()",
+      "file_type": "code",
+      "source_file": "image_service.py",
+      "source_location": "L110",
+      "id": "yolov8_streamlit_detection_tracking_image_service_world_class_input",
+      "community": 5,
+      "norm_label": "_world_class_input()"
+    },
+    {
+      "label": "_run_inference()",
+      "file_type": "code",
+      "source_file": "image_service.py",
+      "source_location": "L135",
+      "id": "yolov8_streamlit_detection_tracking_image_service_run_inference",
+      "community": 5,
+      "norm_label": "_run_inference()"
+    },
+    {
+      "label": "_display_results()",
+      "file_type": "code",
+      "source_file": "image_service.py",
+      "source_location": "L152",
+      "id": "yolov8_streamlit_detection_tracking_image_service_display_results",
+      "community": 5,
+      "norm_label": "_display_results()"
+    },
+    {
+      "label": "Image inference service \u2014 Detection, Segmentation, YOLO World & Pose.  Provide",
+      "file_type": "rationale",
+      "source_file": "image_service.py",
+      "source_location": "L1",
+      "id": "yolov8_streamlit_detection_tracking_image_service_rationale_1",
+      "community": 5,
+      "norm_label": "image inference service \u2014 detection, segmentation, yolo world & pose.  provide"
+    },
+    {
+      "label": "Render the full image-inference page for the chosen *task*.",
+      "file_type": "rationale",
+      "source_file": "image_service.py",
+      "source_location": "L26",
+      "id": "yolov8_streamlit_detection_tracking_image_service_rationale_26",
+      "community": 5,
+      "norm_label": "render the full image-inference page for the chosen *task*."
+    },
+    {
+      "label": "Show a text-area for the user to type category-level object classes.",
+      "file_type": "rationale",
+      "source_file": "image_service.py",
+      "source_location": "L85",
+      "id": "yolov8_streamlit_detection_tracking_image_service_rationale_85",
+      "community": 5,
+      "norm_label": "show a text-area for the user to type category-level object classes."
+    },
+    {
+      "label": "Show a text-area for the user to type object classes / descriptive prompts.",
+      "file_type": "rationale",
+      "source_file": "image_service.py",
+      "source_location": "L111",
+      "id": "yolov8_streamlit_detection_tracking_image_service_rationale_111",
+      "community": 5,
+      "norm_label": "show a text-area for the user to type object classes / descriptive prompts."
+    },
+    {
+      "label": "Show structured results below the annotated image.",
+      "file_type": "rationale",
+      "source_file": "image_service.py",
+      "source_location": "L153",
+      "id": "yolov8_streamlit_detection_tracking_image_service_rationale_153",
+      "community": 5,
+      "norm_label": "show structured results below the annotated image."
+    },
+    {
+      "label": "model_loader.py",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L1",
+      "id": "model_loader_py",
+      "community": 0,
+      "norm_label": "model_loader.py"
+    },
+    {
+      "label": "load_model()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L16",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_load_model",
+      "community": 0,
+      "norm_label": "load_model()"
+    },
+    {
+      "label": "load_world_model()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L30",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_load_world_model",
+      "community": 0,
+      "norm_label": "load_world_model()"
+    },
+    {
+      "label": "load_yoloe_model()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L44",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_load_yoloe_model",
+      "community": 0,
+      "norm_label": "load_yoloe_model()"
+    },
+    {
+      "label": "resolve_device()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L57",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_resolve_device",
+      "community": 0,
+      "norm_label": "resolve_device()"
+    },
+    {
+      "label": "get_device_status()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L67",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_get_device_status",
+      "community": 0,
+      "norm_label": "get_device_status()"
+    },
+    {
+      "label": "_configure_torch_backends()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L82",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_configure_torch_backends",
+      "community": 0,
+      "norm_label": "_configure_torch_backends()"
+    },
+    {
+      "label": "_ensure_device()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L107",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_ensure_device",
+      "community": 0,
+      "norm_label": "_ensure_device()"
+    },
+    {
+      "label": "_set_world_classes()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L126",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_set_world_classes",
+      "community": 0,
+      "norm_label": "_set_world_classes()"
+    },
+    {
+      "label": "_set_yoloe_classes()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L151",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_set_yoloe_classes",
+      "community": 0,
+      "norm_label": "_set_yoloe_classes()"
+    },
+    {
+      "label": "get_model_for_task()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L167",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task",
+      "community": 0,
+      "norm_label": "get_model_for_task()"
+    },
+    {
+      "label": "load_fresh_model()",
+      "file_type": "code",
+      "source_file": "model_loader.py",
+      "source_location": "L212",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_load_fresh_model",
+      "community": 0,
+      "norm_label": "load_fresh_model()"
+    },
+    {
+      "label": "Centralized model loading with Streamlit caching. Models are loaded once and re",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L1",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_1",
+      "community": 0,
+      "norm_label": "centralized model loading with streamlit caching. models are loaded once and re"
+    },
+    {
+      "label": "Load a YOLO / RT-DETR model (detection / segmentation / pose).      Checks the l",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L17",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_17",
+      "community": 0,
+      "norm_label": "load a yolo / rt-detr model (detection / segmentation / pose).      checks the l"
+    },
+    {
+      "label": "Load a YOLO World v2 model for open-vocabulary detection.      Uses the ``YOLOWo",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L31",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_31",
+      "community": 0,
+      "norm_label": "load a yolo world v2 model for open-vocabulary detection.      uses the ``yolowo"
+    },
+    {
+      "label": "Load a YOLOE model for text-prompted detection + segmentation.      Uses the ``Y",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L45",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_45",
+      "community": 0,
+      "norm_label": "load a yoloe model for text-prompted detection + segmentation.      uses the ``y"
+    },
+    {
+      "label": "Resolve ``auto`` / CUDA requests to an actual runtime device string.",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L58",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_58",
+      "community": 0,
+      "norm_label": "resolve ``auto`` / cuda requests to an actual runtime device string."
+    },
+    {
+      "label": "Return UI-friendly runtime device information for the current host.",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L68",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_68",
+      "community": 0,
+      "norm_label": "return ui-friendly runtime device information for the current host."
+    },
+    {
+      "label": "Enable CUDA inference settings that improve throughput on fixed-size workloads.",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L83",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_83",
+      "community": 0,
+      "norm_label": "enable cuda inference settings that improve throughput on fixed-size workloads."
+    },
+    {
+      "label": "Move model to the best available device.      This fixes the \"index is on cpu, d",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L108",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_108",
+      "community": 0,
+      "norm_label": "move model to the best available device.      this fixes the \"index is on cpu, d"
+    },
+    {
+      "label": "Safely set classes on a YOLOWorld model, avoiding CPU/CUDA mismatch.      ``set",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L131",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_131",
+      "community": 0,
+      "norm_label": "safely set classes on a yoloworld model, avoiding cpu/cuda mismatch.      ``set"
+    },
+    {
+      "label": "Safely set classes on a YOLOE model, avoiding CPU/CUDA mismatch.      Same patte",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L156",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_156",
+      "community": 0,
+      "norm_label": "safely set classes on a yoloe model, avoiding cpu/cuda mismatch.      same patte"
+    },
+    {
+      "label": "Return the appropriate model for *task*.      Parameters     ----------     t",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L173",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_173",
+      "community": 0,
+      "norm_label": "return the appropriate model for *task*.      parameters     ----------     t"
+    },
+    {
+      "label": "Load a **fresh** (uncached) model instance.      Used by multi-video mode so ea",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L218",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_218",
+      "community": 0,
+      "norm_label": "load a **fresh** (uncached) model instance.      used by multi-video mode so ea"
+    },
+    {
+      "label": "video_service.py",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L1",
+      "id": "video_service_py",
+      "community": 1,
+      "norm_label": "video_service.py"
+    },
+    {
+      "label": "_color_for_track()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L51",
+      "id": "yolov8_streamlit_detection_tracking_video_service_color_for_track",
+      "community": 4,
+      "norm_label": "_color_for_track()"
+    },
+    {
+      "label": "_PerformanceOptions",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L57",
+      "id": "yolov8_streamlit_detection_tracking_video_service_performanceoptions",
+      "community": 1,
+      "norm_label": "_performanceoptions"
+    },
+    {
+      "label": "_annotate_with_ids()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L66",
+      "id": "yolov8_streamlit_detection_tracking_video_service_annotate_with_ids",
+      "community": 4,
+      "norm_label": "_annotate_with_ids()"
+    },
+    {
+      "label": "_frame_to_bytes()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L142",
+      "id": "yolov8_streamlit_detection_tracking_video_service_frame_to_bytes",
+      "community": 1,
+      "norm_label": "_frame_to_bytes()"
+    },
+    {
+      "label": "_resize_for_display()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L152",
+      "id": "yolov8_streamlit_detection_tracking_video_service_resize_for_display",
+      "community": 4,
+      "norm_label": "_resize_for_display()"
+    },
+    {
+      "label": "_default_inference_imgsz()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L162",
+      "id": "yolov8_streamlit_detection_tracking_video_service_default_inference_imgsz",
+      "community": 1,
+      "norm_label": "_default_inference_imgsz()"
+    },
+    {
+      "label": "_default_ui_update_interval()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L168",
+      "id": "yolov8_streamlit_detection_tracking_video_service_default_ui_update_interval",
+      "community": 1,
+      "norm_label": "_default_ui_update_interval()"
+    },
+    {
+      "label": "_performance_options()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L174",
+      "id": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "community": 1,
+      "norm_label": "_performance_options()"
+    },
+    {
+      "label": "render()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L223",
+      "id": "yolov8_streamlit_detection_tracking_video_service_render",
+      "community": 6,
+      "norm_label": "render()"
+    },
+    {
+      "label": "_yoloe_class_input()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L293",
+      "id": "yolov8_streamlit_detection_tracking_video_service_yoloe_class_input",
+      "community": 6,
+      "norm_label": "_yoloe_class_input()"
+    },
+    {
+      "label": "_world_class_input()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L316",
+      "id": "yolov8_streamlit_detection_tracking_video_service_world_class_input",
+      "community": 6,
+      "norm_label": "_world_class_input()"
+    },
+    {
+      "label": "_tracker_options()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L337",
+      "id": "yolov8_streamlit_detection_tracking_video_service_tracker_options",
+      "community": 6,
+      "norm_label": "_tracker_options()"
+    },
+    {
+      "label": "_process_frame()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L353",
+      "id": "yolov8_streamlit_detection_tracking_video_service_process_frame",
+      "community": 4,
+      "norm_label": "_process_frame()"
+    },
+    {
+      "label": "_draw_overlay()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L429",
+      "id": "yolov8_streamlit_detection_tracking_video_service_draw_overlay",
+      "community": 4,
+      "norm_label": "_draw_overlay()"
+    },
+    {
+      "label": "_LiveMetrics",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L490",
+      "id": "yolov8_streamlit_detection_tracking_video_service_livemetrics",
+      "community": 1,
+      "norm_label": "_livemetrics"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L493",
+      "id": "yolov8_streamlit_detection_tracking_video_service_livemetrics_init",
+      "community": 1,
+      "norm_label": ".__init__()"
+    },
+    {
+      "label": ".update()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L508",
+      "id": "yolov8_streamlit_detection_tracking_video_service_livemetrics_update",
+      "community": 1,
+      "norm_label": ".update()"
+    },
+    {
+      "label": "_run_video_loop()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L533",
+      "id": "yolov8_streamlit_detection_tracking_video_service_run_video_loop",
+      "community": 1,
+      "norm_label": "_run_video_loop()"
+    },
+    {
+      "label": "_run_multi_video_loop()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L630",
+      "id": "yolov8_streamlit_detection_tracking_video_service_run_multi_video_loop",
+      "community": 1,
+      "norm_label": "_run_multi_video_loop()"
+    },
+    {
+      "label": "_play_stored_video()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L754",
+      "id": "yolov8_streamlit_detection_tracking_video_service_play_stored_video",
+      "community": 1,
+      "norm_label": "_play_stored_video()"
+    },
+    {
+      "label": "_play_webcam()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L822",
+      "id": "yolov8_streamlit_detection_tracking_video_service_play_webcam",
+      "community": 1,
+      "norm_label": "_play_webcam()"
+    },
+    {
+      "label": "_play_rtsp()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L940",
+      "id": "yolov8_streamlit_detection_tracking_video_service_play_rtsp",
+      "community": 1,
+      "norm_label": "_play_rtsp()"
+    },
+    {
+      "label": "_play_youtube()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L972",
+      "id": "yolov8_streamlit_detection_tracking_video_service_play_youtube",
+      "community": 1,
+      "norm_label": "_play_youtube()"
+    },
+    {
+      "label": "_get_youtube_stream()",
+      "file_type": "code",
+      "source_file": "video_service.py",
+      "source_location": "L1009",
+      "id": "yolov8_streamlit_detection_tracking_video_service_get_youtube_stream",
+      "community": 1,
+      "norm_label": "_get_youtube_stream()"
+    },
+    {
+      "label": "Video inference service \u2014 Stored videos, Webcam, RTSP & YouTube.  Features --",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L1",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_1",
+      "community": 1,
+      "norm_label": "video inference service \u2014 stored videos, webcam, rtsp & youtube.  features --"
+    },
+    {
+      "label": "Return a distinct BGR colour for *track_id*.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L52",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_52",
+      "community": 4,
+      "norm_label": "return a distinct bgr colour for *track_id*."
+    },
+    {
+      "label": "Draw bounding boxes with ``class | conf% | ID:N`` labels.      For segmentatio",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L73",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_73",
+      "community": 4,
+      "norm_label": "draw bounding boxes with ``class | conf% | id:n`` labels.      for segmentatio"
+    },
+    {
+      "label": "Encode a BGR *frame* to JPEG bytes for ``st.image()``.      Sending raw bytes a",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L143",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_143",
+      "community": 1,
+      "norm_label": "encode a bgr *frame* to jpeg bytes for ``st.image()``.      sending raw bytes a"
+    },
+    {
+      "label": "Resize an annotated frame for UI display without shrinking inference size.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L153",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_153",
+      "community": 4,
+      "norm_label": "resize an annotated frame for ui display without shrinking inference size."
+    },
+    {
+      "label": "Collect runtime knobs that shift work from CPU-bound UI to GPU inference.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L175",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_175",
+      "community": 1,
+      "norm_label": "collect runtime knobs that shift work from cpu-bound ui to gpu inference."
+    },
+    {
+      "label": "Render the full video-inference page for the chosen *task*.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L229",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_229",
+      "community": 6,
+      "norm_label": "render the full video-inference page for the chosen *task*."
+    },
+    {
+      "label": "Show a text-area for category-level object classes (YOLOE).",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L294",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_294",
+      "community": 6,
+      "norm_label": "show a text-area for category-level object classes (yoloe)."
+    },
+    {
+      "label": "Sidebar widgets for tracker selection.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L338",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_338",
+      "community": 6,
+      "norm_label": "sidebar widgets for tracker selection."
+    },
+    {
+      "label": "Run inference on a single frame.      Returns ``(annotated_frame, object_count,",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L365",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_365",
+      "community": 4,
+      "norm_label": "run inference on a single frame.      returns ``(annotated_frame, object_count,"
+    },
+    {
+      "label": "Draw local (per-frame) + global (cumulative) tracking overlay.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L436",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_436",
+      "community": 4,
+      "norm_label": "draw local (per-frame) + global (cumulative) tracking overlay."
+    },
+    {
+      "label": "Manages sidebar placeholder widgets that update each frame.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L491",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_491",
+      "community": 1,
+      "norm_label": "manages sidebar placeholder widgets that update each frame."
+    },
+    {
+      "label": "Common processing loop for any ``cv2.VideoCapture`` source.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L543",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_543",
+      "community": 1,
+      "norm_label": "common processing loop for any ``cv2.videocapture`` source."
+    },
+    {
+      "label": "Process multiple videos simultaneously in side-by-side columns.      Each vide",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L643",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_643",
+      "community": 1,
+      "norm_label": "process multiple videos simultaneously in side-by-side columns.      each vide"
+    },
+    {
+      "label": "Browser-based webcam via streamlit-webrtc (works locally + cloud).",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L834",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_834",
+      "community": 1,
+      "norm_label": "browser-based webcam via streamlit-webrtc (works locally + cloud)."
+    },
+    {
+      "label": "setup_cuda_venv.ps1",
+      "file_type": "code",
+      "source_file": "scripts/setup_cuda_venv.ps1",
+      "source_location": "L1",
+      "id": "scripts_setup_cuda_venv_ps1",
+      "community": 12,
+      "norm_label": "setup_cuda_venv.ps1"
+    },
+    {
+      "label": "verify_torch_cuda.py",
+      "file_type": "code",
+      "source_file": "scripts/verify_torch_cuda.py",
+      "source_location": "L1",
+      "id": "scripts_verify_torch_cuda_py",
+      "community": 10,
+      "norm_label": "verify_torch_cuda.py"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "scripts/verify_torch_cuda.py",
+      "source_location": "L8",
+      "id": "scripts_verify_torch_cuda_main",
+      "community": 10,
+      "norm_label": "main()"
+    },
+    {
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "id": "agents_md",
+      "community": 11,
+      "norm_label": "agents.md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "id": "yolov8_streamlit_detection_tracking_agents_graphify",
+      "community": 11,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "id": "readme_md",
+      "community": 2,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udd2c YOLO Vision Studio",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L3",
+      "id": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "community": 2,
+      "norm_label": "\ud83d\udd2c yolo vision studio"
+    },
+    {
+      "label": "\ud83c\udd95 What's New in v2.0",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L20",
+      "id": "yolov8_streamlit_detection_tracking_readme_what_s_new_in_v2_0",
+      "community": 2,
+      "norm_label": "\ud83c\udd95 what's new in v2.0"
+    },
+    {
+      "label": "\u2728 Features",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L40",
+      "id": "yolov8_streamlit_detection_tracking_readme_features",
+      "community": 2,
+      "norm_label": "\u2728 features"
+    },
+    {
+      "label": "\ud83d\udcf7 Image Inference",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L42",
+      "id": "yolov8_streamlit_detection_tracking_readme_image_inference",
+      "community": 2,
+      "norm_label": "\ud83d\udcf7 image inference"
+    },
+    {
+      "label": "\ud83c\udfac Video Inference",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L49",
+      "id": "yolov8_streamlit_detection_tracking_readme_video_inference",
+      "community": 2,
+      "norm_label": "\ud83c\udfac video inference"
+    },
+    {
+      "label": "\ud83c\udfd7\ufe0f Architecture",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L58",
+      "id": "yolov8_streamlit_detection_tracking_readme_architecture",
+      "community": 2,
+      "norm_label": "\ud83c\udfd7\ufe0f architecture"
+    },
+    {
+      "label": "\ud83d\udcf8 Demo",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L66",
+      "id": "yolov8_streamlit_detection_tracking_readme_demo",
+      "community": 2,
+      "norm_label": "\ud83d\udcf8 demo"
+    },
+    {
+      "label": "Tracking with Object Detection",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L68",
+      "id": "yolov8_streamlit_detection_tracking_readme_tracking_with_object_detection",
+      "community": 2,
+      "norm_label": "tracking with object detection"
+    },
+    {
+      "label": "Application Overview",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L71",
+      "id": "yolov8_streamlit_detection_tracking_readme_application_overview",
+      "community": 2,
+      "norm_label": "application overview"
+    },
+    {
+      "label": "Screenshots",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L74",
+      "id": "yolov8_streamlit_detection_tracking_readme_screenshots",
+      "community": 2,
+      "norm_label": "screenshots"
+    },
+    {
+      "label": "\ud83d\ude80 Quick Start",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L82",
+      "id": "yolov8_streamlit_detection_tracking_readme_quick_start",
+      "community": 7,
+      "norm_label": "\ud83d\ude80 quick start"
+    },
+    {
+      "label": "Prerequisites",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L84",
+      "id": "yolov8_streamlit_detection_tracking_readme_prerequisites",
+      "community": 7,
+      "norm_label": "prerequisites"
+    },
+    {
+      "label": "Installation",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L90",
+      "id": "yolov8_streamlit_detection_tracking_readme_installation",
+      "community": 7,
+      "norm_label": "installation"
+    },
+    {
+      "label": "code:bash (# 1. Clone the repository)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L92",
+      "id": "yolov8_streamlit_detection_tracking_readme_codeblock_1",
+      "community": 7,
+      "norm_label": "code:bash (# 1. clone the repository)"
+    },
+    {
+      "label": "Windows NVIDIA GPU Setup",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L106",
+      "id": "yolov8_streamlit_detection_tracking_readme_windows_nvidia_gpu_setup",
+      "community": 7,
+      "norm_label": "windows nvidia gpu setup"
+    },
+    {
+      "label": "code:powershell (powershell -ExecutionPolicy Bypass -File scripts/setup_cuda_)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L110",
+      "id": "yolov8_streamlit_detection_tracking_readme_codeblock_2",
+      "community": 7,
+      "norm_label": "code:powershell (powershell -executionpolicy bypass -file scripts/setup_cuda_)"
+    },
+    {
+      "label": "Download Model Weights",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L118",
+      "id": "yolov8_streamlit_detection_tracking_readme_download_model_weights",
+      "community": 7,
+      "norm_label": "download model weights"
+    },
+    {
+      "label": "code:bash (# Detection)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L124",
+      "id": "yolov8_streamlit_detection_tracking_readme_codeblock_3",
+      "community": 7,
+      "norm_label": "code:bash (# detection)"
+    },
+    {
+      "label": "Run the App",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L138",
+      "id": "yolov8_streamlit_detection_tracking_readme_run_the_app",
+      "community": 7,
+      "norm_label": "run the app"
+    },
+    {
+      "label": "code:bash (streamlit run app.py)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L140",
+      "id": "yolov8_streamlit_detection_tracking_readme_codeblock_4",
+      "community": 7,
+      "norm_label": "code:bash (streamlit run app.py)"
+    },
+    {
+      "label": "\ud83d\udcd6 Usage Guide",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L148",
+      "id": "yolov8_streamlit_detection_tracking_readme_usage_guide",
+      "community": 8,
+      "norm_label": "\ud83d\udcd6 usage guide"
+    },
+    {
+      "label": "Sidebar Controls",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L150",
+      "id": "yolov8_streamlit_detection_tracking_readme_sidebar_controls",
+      "community": 8,
+      "norm_label": "sidebar controls"
+    },
+    {
+      "label": "Image Inference",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L162",
+      "id": "yolov8_streamlit_detection_tracking_readme_image_inference_162",
+      "community": 8,
+      "norm_label": "image inference"
+    },
+    {
+      "label": "Video Inference",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L170",
+      "id": "yolov8_streamlit_detection_tracking_readme_video_inference_170",
+      "community": 8,
+      "norm_label": "video inference"
+    },
+    {
+      "label": "Adding Your Own Videos",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L182",
+      "id": "yolov8_streamlit_detection_tracking_readme_adding_your_own_videos",
+      "community": 8,
+      "norm_label": "adding your own videos"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Project Structure",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L188",
+      "id": "yolov8_streamlit_detection_tracking_readme_project_structure",
+      "community": 2,
+      "norm_label": "\ud83d\uddc2\ufe0f project structure"
+    },
+    {
+      "label": "code:block5 (yolov8-streamlit-detection-tracking/)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L190",
+      "id": "yolov8_streamlit_detection_tracking_readme_codeblock_5",
+      "community": 2,
+      "norm_label": "code:block5 (yolov8-streamlit-detection-tracking/)"
+    },
+    {
+      "label": "Module Responsibilities",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L207",
+      "id": "yolov8_streamlit_detection_tracking_readme_module_responsibilities",
+      "community": 2,
+      "norm_label": "module responsibilities"
+    },
+    {
+      "label": "\u2699\ufe0f Configuration",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L219",
+      "id": "yolov8_streamlit_detection_tracking_readme_configuration",
+      "community": 2,
+      "norm_label": "\u2699\ufe0f configuration"
+    },
+    {
+      "label": "code:python (# Models \u2014 change to larger variants for better accuracy)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L223",
+      "id": "yolov8_streamlit_detection_tracking_readme_codeblock_6",
+      "community": 2,
+      "norm_label": "code:python (# models \u2014 change to larger variants for better accuracy)"
+    },
+    {
+      "label": "Custom Models",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L242",
+      "id": "yolov8_streamlit_detection_tracking_readme_custom_models",
+      "community": 2,
+      "norm_label": "custom models"
+    },
+    {
+      "label": "code:python (# In config.py)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L246",
+      "id": "yolov8_streamlit_detection_tracking_readme_codeblock_7",
+      "community": 2,
+      "norm_label": "code:python (# in config.py)"
+    },
+    {
+      "label": "\u2601\ufe0f Deploy to Streamlit Cloud",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L254",
+      "id": "yolov8_streamlit_detection_tracking_readme_deploy_to_streamlit_cloud",
+      "community": 2,
+      "norm_label": "\u2601\ufe0f deploy to streamlit cloud"
+    },
+    {
+      "label": "\ud83e\udd1d Contributing",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L265",
+      "id": "yolov8_streamlit_detection_tracking_readme_contributing",
+      "community": 2,
+      "norm_label": "\ud83e\udd1d contributing"
+    },
+    {
+      "label": "Ideas for Contributions",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L275",
+      "id": "yolov8_streamlit_detection_tracking_readme_ideas_for_contributions",
+      "community": 2,
+      "norm_label": "ideas for contributions"
+    },
+    {
+      "label": "\ud83d\udcda Resources",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L285",
+      "id": "yolov8_streamlit_detection_tracking_readme_resources",
+      "community": 2,
+      "norm_label": "\ud83d\udcda resources"
+    },
+    {
+      "label": "\ud83d\udcc4 License",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L296",
+      "id": "yolov8_streamlit_detection_tracking_readme_license",
+      "community": 2,
+      "norm_label": "\ud83d\udcc4 license"
+    },
+    {
+      "label": "\ud83d\ude4f Acknowledgements",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L300",
+      "id": "yolov8_streamlit_detection_tracking_readme_acknowledgements",
+      "community": 2,
+      "norm_label": "\ud83d\ude4f acknowledgements"
+    },
+    {
+      "label": "Return local weights path if it exists, else the bare name for auto-download.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L171",
+      "community": 3,
+      "norm_label": "return local weights path if it exists, else the bare name for auto-download.",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_171"
+    },
+    {
+      "label": "Move any ``.pt`` files from the project root into ``weights/``.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L189",
+      "community": 3,
+      "norm_label": "move any ``.pt`` files from the project root into ``weights/``.",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_189"
+    },
+    {
+      "label": "Return ``{display_label: filename}`` for the given *task*.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L197",
+      "community": 3,
+      "norm_label": "return ``{display_label: filename}`` for the given *task*.",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_197"
+    },
+    {
+      "label": "Return ``{display_label: device_value}`` for the device selector.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L209",
+      "community": 3,
+      "norm_label": "return ``{display_label: device_value}`` for the device selector.",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_209"
+    },
+    {
+      "label": "Load a YOLO / RT-DETR model (detection / segmentation / pose).      Checks the l",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L15",
+      "community": 0,
+      "norm_label": "load a yolo / rt-detr model (detection / segmentation / pose).      checks the l",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_15"
+    },
+    {
+      "label": "Load a YOLO World v2 model for open-vocabulary detection.      Uses the ``YOLOWo",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L29",
+      "community": 0,
+      "norm_label": "load a yolo world v2 model for open-vocabulary detection.      uses the ``yolowo",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_29"
+    },
+    {
+      "label": "Load a YOLOE model for text-prompted detection + segmentation.      Uses the ``Y",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L43",
+      "community": 0,
+      "norm_label": "load a yoloe model for text-prompted detection + segmentation.      uses the ``y",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_43"
+    },
+    {
+      "label": "Resolve ``auto`` / CUDA requests to an actual runtime device string.",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L56",
+      "community": 0,
+      "norm_label": "resolve ``auto`` / cuda requests to an actual runtime device string.",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_56"
+    },
+    {
+      "label": "Return UI-friendly runtime device information for the current host.",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L66",
+      "community": 0,
+      "norm_label": "return ui-friendly runtime device information for the current host.",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_66"
+    },
+    {
+      "label": "Move model to the best available device.      This fixes the \"index is on cpu, d",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L81",
+      "community": 0,
+      "norm_label": "move model to the best available device.      this fixes the \"index is on cpu, d",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_81"
+    },
+    {
+      "label": "Safely set classes on a YOLOWorld model, avoiding CPU/CUDA mismatch.      ``set",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L103",
+      "community": 0,
+      "norm_label": "safely set classes on a yoloworld model, avoiding cpu/cuda mismatch.      ``set",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_103"
+    },
+    {
+      "label": "Safely set classes on a YOLOE model, avoiding CPU/CUDA mismatch.      Same patte",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L128",
+      "community": 0,
+      "norm_label": "safely set classes on a yoloe model, avoiding cpu/cuda mismatch.      same patte",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_128"
+    },
+    {
+      "label": "Return the appropriate model for *task*.      Parameters     ----------     t",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L145",
+      "community": 0,
+      "norm_label": "return the appropriate model for *task*.      parameters     ----------     t",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_145"
+    },
+    {
+      "label": "Load a **fresh** (uncached) model instance.      Used by multi-video mode so ea",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L190",
+      "community": 0,
+      "norm_label": "load a **fresh** (uncached) model instance.      used by multi-video mode so ea",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_190"
+    },
+    {
+      "label": "Return a distinct BGR colour for *track_id*.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L51",
+      "community": 4,
+      "norm_label": "return a distinct bgr colour for *track_id*.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_51"
+    },
+    {
+      "label": "Draw bounding boxes with ``class | conf% | ID:N`` labels.      For segmentatio",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L65",
+      "community": 4,
+      "norm_label": "draw bounding boxes with ``class | conf% | id:n`` labels.      for segmentatio",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_65"
+    },
+    {
+      "label": "Encode a BGR *frame* to JPEG bytes for ``st.image()``.      Sending raw bytes",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L135",
+      "community": 1,
+      "norm_label": "encode a bgr *frame* to jpeg bytes for ``st.image()``.      sending raw bytes",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_135"
+    },
+    {
+      "label": "Show a text-area for category-level object classes (YOLOE).",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L211",
+      "community": 6,
+      "norm_label": "show a text-area for category-level object classes (yoloe).",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_211"
+    },
+    {
+      "label": "Sidebar widgets for tracker selection.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L255",
+      "community": 6,
+      "norm_label": "sidebar widgets for tracker selection.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_255"
+    },
+    {
+      "label": "Run inference on a single frame.      Returns ``(annotated_frame, object_count",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L280",
+      "community": 4,
+      "norm_label": "run inference on a single frame.      returns ``(annotated_frame, object_count",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_280"
+    },
+    {
+      "label": "Draw local (per-frame) + global (cumulative) tracking overlay.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L342",
+      "community": 4,
+      "norm_label": "draw local (per-frame) + global (cumulative) tracking overlay.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_342"
+    },
+    {
+      "label": "Manages sidebar placeholder widgets that update each frame.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L397",
+      "community": 1,
+      "norm_label": "manages sidebar placeholder widgets that update each frame.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_397"
+    },
+    {
+      "label": "Common processing loop for any ``cv2.VideoCapture`` source.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L448",
+      "community": 1,
+      "norm_label": "common processing loop for any ``cv2.videocapture`` source.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_448"
+    },
+    {
+      "label": "Process multiple videos simultaneously in side-by-side columns.      Each vide",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L540",
+      "community": 1,
+      "norm_label": "process multiple videos simultaneously in side-by-side columns.      each vide",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_540"
+    },
+    {
+      "label": "Browser-based webcam via streamlit-webrtc (works locally + cloud).",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L716",
+      "community": 1,
+      "norm_label": "browser-based webcam via streamlit-webrtc (works locally + cloud).",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_716"
+    },
+    {
+      "label": "Image Inference",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L161",
+      "community": 8,
+      "norm_label": "image inference",
+      "id": "yolov8_streamlit_detection_tracking_readme_image_inference_161"
+    },
+    {
+      "label": "Video Inference",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L169",
+      "community": 8,
+      "norm_label": "video inference",
+      "id": "yolov8_streamlit_detection_tracking_readme_video_inference_169"
+    },
+    {
+      "label": "Scan ``videos/`` directory each time so newly added files appear.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L118",
+      "community": 3,
+      "norm_label": "scan ``videos/`` directory each time so newly added files appear.",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_118"
+    },
+    {
+      "label": "Return local weights path if it exists, else the bare name for auto-download.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L160",
+      "community": 3,
+      "norm_label": "return local weights path if it exists, else the bare name for auto-download.",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_160"
+    },
+    {
+      "label": "Move any ``.pt`` files from the project root into ``weights/``.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L178",
+      "community": 3,
+      "norm_label": "move any ``.pt`` files from the project root into ``weights/``.",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_178"
+    },
+    {
+      "label": "Return ``{display_label: filename}`` for the given *task*.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L186",
+      "community": 3,
+      "norm_label": "return ``{display_label: filename}`` for the given *task*.",
+      "id": "yolov8_streamlit_detection_tracking_config_rationale_186"
+    },
+    {
+      "label": "Render the full image-inference page for the chosen *task*.",
+      "file_type": "rationale",
+      "source_file": "image_service.py",
+      "source_location": "L21",
+      "community": 5,
+      "norm_label": "render the full image-inference page for the chosen *task*.",
+      "id": "yolov8_streamlit_detection_tracking_image_service_rationale_21"
+    },
+    {
+      "label": "Show a text-area for the user to type category-level object classes.",
+      "file_type": "rationale",
+      "source_file": "image_service.py",
+      "source_location": "L74",
+      "community": 5,
+      "norm_label": "show a text-area for the user to type category-level object classes.",
+      "id": "yolov8_streamlit_detection_tracking_image_service_rationale_74"
+    },
+    {
+      "label": "Show a text-area for the user to type object classes / descriptive prompts.",
+      "file_type": "rationale",
+      "source_file": "image_service.py",
+      "source_location": "L100",
+      "community": 5,
+      "norm_label": "show a text-area for the user to type object classes / descriptive prompts.",
+      "id": "yolov8_streamlit_detection_tracking_image_service_rationale_100"
+    },
+    {
+      "label": "Show structured results below the annotated image.",
+      "file_type": "rationale",
+      "source_file": "image_service.py",
+      "source_location": "L136",
+      "community": 5,
+      "norm_label": "show structured results below the annotated image.",
+      "id": "yolov8_streamlit_detection_tracking_image_service_rationale_136"
+    },
+    {
+      "label": "Load a YOLO World v2 model for open-vocabulary detection.      Uses the ``YOLO",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L28",
+      "community": 0,
+      "norm_label": "load a yolo world v2 model for open-vocabulary detection.      uses the ``yolo",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_28"
+    },
+    {
+      "label": "Load a YOLOE model for text-prompted detection + segmentation.      Uses the `",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L41",
+      "community": 0,
+      "norm_label": "load a yoloe model for text-prompted detection + segmentation.      uses the `",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_41"
+    },
+    {
+      "label": "Move model to the best available device.      This fixes the \"index is on cpu,",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L53",
+      "community": 0,
+      "norm_label": "move model to the best available device.      this fixes the \"index is on cpu,",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_53"
+    },
+    {
+      "label": "Safely set classes on a YOLOWorld model, avoiding CPU/CUDA mismatch.      ``se",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L70",
+      "community": 0,
+      "norm_label": "safely set classes on a yoloworld model, avoiding cpu/cuda mismatch.      ``se",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_70"
+    },
+    {
+      "label": "Safely set classes on a YOLOE model, avoiding CPU/CUDA mismatch.      Same pat",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L91",
+      "community": 0,
+      "norm_label": "safely set classes on a yoloe model, avoiding cpu/cuda mismatch.      same pat",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_91"
+    },
+    {
+      "label": "Return the appropriate model for *task*.      Parameters     ----------",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L107",
+      "community": 0,
+      "norm_label": "return the appropriate model for *task*.      parameters     ----------",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_107"
+    },
+    {
+      "label": "Load a **fresh** (uncached) model instance.      Used by multi-video mode so e",
+      "file_type": "rationale",
+      "source_file": "model_loader.py",
+      "source_location": "L151",
+      "community": 0,
+      "norm_label": "load a **fresh** (uncached) model instance.      used by multi-video mode so e",
+      "id": "yolov8_streamlit_detection_tracking_model_loader_rationale_151"
+    },
+    {
+      "label": "Render the full video-inference page for the chosen *task*.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L148",
+      "community": 6,
+      "norm_label": "render the full video-inference page for the chosen *task*.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_148"
+    },
+    {
+      "label": "Show a text-area for category-level object classes (YOLOE).",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L199",
+      "community": 6,
+      "norm_label": "show a text-area for category-level object classes (yoloe).",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_199"
+    },
+    {
+      "label": "Sidebar widgets for tracker selection.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L243",
+      "community": 6,
+      "norm_label": "sidebar widgets for tracker selection.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_243"
+    },
+    {
+      "label": "Run inference on a single frame.      Returns ``(annotated_frame, object_count",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L267",
+      "community": 4,
+      "norm_label": "run inference on a single frame.      returns ``(annotated_frame, object_count",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_267"
+    },
+    {
+      "label": "Draw local (per-frame) + global (cumulative) tracking overlay.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L323",
+      "community": 4,
+      "norm_label": "draw local (per-frame) + global (cumulative) tracking overlay.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_323"
+    },
+    {
+      "label": "Manages sidebar placeholder widgets that update each frame.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L378",
+      "community": 1,
+      "norm_label": "manages sidebar placeholder widgets that update each frame.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_378"
+    },
+    {
+      "label": "Common processing loop for any ``cv2.VideoCapture`` source.",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L428",
+      "community": 1,
+      "norm_label": "common processing loop for any ``cv2.videocapture`` source.",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_428"
+    },
+    {
+      "label": "Process multiple videos simultaneously in side-by-side columns.      Each vide",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L518",
+      "community": 1,
+      "norm_label": "process multiple videos simultaneously in side-by-side columns.      each vide",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_518"
+    },
+    {
+      "label": "Browser-based webcam via streamlit-webrtc (works locally + cloud).",
+      "file_type": "rationale",
+      "source_file": "video_service.py",
+      "source_location": "L689",
+      "community": 1,
+      "norm_label": "browser-based webcam via streamlit-webrtc (works locally + cloud).",
+      "id": "yolov8_streamlit_detection_tracking_video_service_rationale_689"
+    },
+    {
+      "label": "Image Inference",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L148",
+      "community": 8,
+      "norm_label": "image inference",
+      "id": "yolov8_streamlit_detection_tracking_readme_image_inference_148"
+    },
+    {
+      "label": "Video Inference",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L156",
+      "community": 8,
+      "norm_label": "video inference",
+      "id": "yolov8_streamlit_detection_tracking_readme_video_inference_156"
+    }
+  ],
+  "links": [
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_app_rationale_1",
+      "target": "app_py"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L117",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "config_py",
+      "target": "yolov8_streamlit_detection_tracking_config_get_videos_dict"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L159",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "config_py",
+      "target": "yolov8_streamlit_detection_tracking_config_resolve_model_path"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L177",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "config_py",
+      "target": "yolov8_streamlit_detection_tracking_config_sweep_stray_weights"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L185",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "config_py",
+      "target": "yolov8_streamlit_detection_tracking_config_get_model_catalog"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L208",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "config_py",
+      "target": "yolov8_streamlit_detection_tracking_config_get_device_catalog"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_1",
+      "target": "config_py"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L129",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_129",
+      "target": "yolov8_streamlit_detection_tracking_config_get_videos_dict"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L118",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_118",
+      "target": "yolov8_streamlit_detection_tracking_config_get_videos_dict"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L181",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_181",
+      "target": "yolov8_streamlit_detection_tracking_config_resolve_model_path",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L171",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_171",
+      "target": "yolov8_streamlit_detection_tracking_config_resolve_model_path"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L160",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_160",
+      "target": "yolov8_streamlit_detection_tracking_config_resolve_model_path"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L199",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_199",
+      "target": "yolov8_streamlit_detection_tracking_config_sweep_stray_weights",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L189",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_189",
+      "target": "yolov8_streamlit_detection_tracking_config_sweep_stray_weights"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L178",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_178",
+      "target": "yolov8_streamlit_detection_tracking_config_sweep_stray_weights"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L207",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_207",
+      "target": "yolov8_streamlit_detection_tracking_config_get_model_catalog",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L197",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_197",
+      "target": "yolov8_streamlit_detection_tracking_config_get_model_catalog"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L186",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_186",
+      "target": "yolov8_streamlit_detection_tracking_config_get_model_catalog"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L219",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_219",
+      "target": "yolov8_streamlit_detection_tracking_config_get_device_catalog",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L209",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_config_rationale_209",
+      "target": "yolov8_streamlit_detection_tracking_config_get_device_catalog"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "image_service_py",
+      "target": "yolov8_streamlit_detection_tracking_image_service_render"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "image_service_py",
+      "target": "yolov8_streamlit_detection_tracking_image_service_yoloe_class_input"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "image_service_py",
+      "target": "yolov8_streamlit_detection_tracking_image_service_world_class_input"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "image_service_py",
+      "target": "yolov8_streamlit_detection_tracking_image_service_run_inference"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "image_service_py",
+      "target": "yolov8_streamlit_detection_tracking_image_service_display_results"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_rationale_1",
+      "target": "image_service_py"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_render",
+      "target": "yolov8_streamlit_detection_tracking_image_service_world_class_input"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_render",
+      "target": "yolov8_streamlit_detection_tracking_image_service_yoloe_class_input"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_render",
+      "target": "yolov8_streamlit_detection_tracking_image_service_run_inference"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_rationale_26",
+      "target": "yolov8_streamlit_detection_tracking_image_service_render"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "image_service.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_render",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_resolve_device"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "image_service.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_render",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_rationale_21",
+      "target": "yolov8_streamlit_detection_tracking_image_service_render"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_rationale_85",
+      "target": "yolov8_streamlit_detection_tracking_image_service_yoloe_class_input"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_rationale_74",
+      "target": "yolov8_streamlit_detection_tracking_image_service_yoloe_class_input"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L111",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_rationale_111",
+      "target": "yolov8_streamlit_detection_tracking_image_service_world_class_input"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L100",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_rationale_100",
+      "target": "yolov8_streamlit_detection_tracking_image_service_world_class_input"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L132",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_run_inference",
+      "target": "yolov8_streamlit_detection_tracking_image_service_display_results"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L153",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_rationale_153",
+      "target": "yolov8_streamlit_detection_tracking_image_service_display_results"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "image_service.py",
+      "source_location": "L136",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_image_service_rationale_136",
+      "target": "yolov8_streamlit_detection_tracking_image_service_display_results"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_model"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_world_model"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_yoloe_model"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_resolve_device"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_get_device_status"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_configure_torch_backends",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_ensure_device"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L69",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_world_classes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_yoloe_classes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L102",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L146",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "model_loader_py",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_fresh_model"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_1",
+      "target": "model_loader_py"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_load_model",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_ensure_device"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L140",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_model"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_17",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_15",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_model"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_load_world_model",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_ensure_device"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L131",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_world_model"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_31",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_world_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_29",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_world_model"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_28",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_world_model"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_load_yoloe_model",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_ensure_device"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L136",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_yoloe_model"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_45",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_yoloe_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_43",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_yoloe_model"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_41",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_yoloe_model"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_get_device_status",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_resolve_device"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_ensure_device",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_resolve_device"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L119",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_set_world_classes",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_resolve_device"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_set_yoloe_classes",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_resolve_device"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_58",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_resolve_device",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "video_service.py",
+      "source_location": "L155",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_render",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_resolve_device"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_56",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_resolve_device"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_68",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_get_device_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L66",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_66",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_get_device_status"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_ensure_device",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_configure_torch_backends",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_83",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_configure_torch_backends",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L212",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_load_fresh_model",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_ensure_device"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_108",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_ensure_device",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L81",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_81",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_ensure_device"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_53",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_ensure_device"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L133",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_world_classes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L171",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_load_fresh_model",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_world_classes"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_131",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_world_classes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L103",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_103",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_world_classes"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_70",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_world_classes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L138",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_yoloe_classes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L178",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_load_fresh_model",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_yoloe_classes"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L156",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_156",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_yoloe_classes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L128",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_128",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_yoloe_classes"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_91",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_set_yoloe_classes"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L173",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_173",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "video_service.py",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_render",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_145",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L107",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_107",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_get_model_for_task"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L218",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_218",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_fresh_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "video_service.py",
+      "source_location": "L528",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_run_multi_video_loop",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_fresh_model"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L190",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_190",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_fresh_model"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "model_loader.py",
+      "source_location": "L151",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_model_loader_rationale_151",
+      "target": "yolov8_streamlit_detection_tracking_model_loader_load_fresh_model"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_color_for_track"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_performanceoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_annotate_with_ids"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L134",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_frame_to_bytes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L152",
+      "weight": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_resize_for_display",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_default_inference_imgsz",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L168",
+      "weight": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_default_ui_update_interval",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L174",
+      "weight": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L147",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_render"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L198",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_yoloe_class_input"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L221",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_world_class_input"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L242",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_tracker_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L258",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_process_frame"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L316",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_draw_overlay"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L377",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_livemetrics"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L420",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_video_loop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L507",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_multi_video_loop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L617",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_play_stored_video"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L679",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_play_webcam"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L774",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_play_rtsp"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L802",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_play_youtube"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L835",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "video_service_py",
+      "target": "yolov8_streamlit_detection_tracking_video_service_get_youtube_stream"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_1",
+      "target": "video_service_py"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_annotate_with_ids",
+      "target": "yolov8_streamlit_detection_tracking_video_service_color_for_track"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_52",
+      "target": "yolov8_streamlit_detection_tracking_video_service_color_for_track",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_51",
+      "target": "yolov8_streamlit_detection_tracking_video_service_color_for_track"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L213",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "target": "yolov8_streamlit_detection_tracking_video_service_performanceoptions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L303",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_process_frame",
+      "target": "yolov8_streamlit_detection_tracking_video_service_annotate_with_ids"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_73",
+      "target": "yolov8_streamlit_detection_tracking_video_service_annotate_with_ids",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_65",
+      "target": "yolov8_streamlit_detection_tracking_video_service_annotate_with_ids"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L467",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_run_video_loop",
+      "target": "yolov8_streamlit_detection_tracking_video_service_frame_to_bytes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L589",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_run_multi_video_loop",
+      "target": "yolov8_streamlit_detection_tracking_video_service_frame_to_bytes"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L143",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_143",
+      "target": "yolov8_streamlit_detection_tracking_video_service_frame_to_bytes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_135",
+      "target": "yolov8_streamlit_detection_tracking_video_service_frame_to_bytes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L425",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_process_frame",
+      "target": "yolov8_streamlit_detection_tracking_video_service_resize_for_display",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L153",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_153",
+      "target": "yolov8_streamlit_detection_tracking_video_service_resize_for_display",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L182",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "target": "yolov8_streamlit_detection_tracking_video_service_default_inference_imgsz",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L204",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "target": "yolov8_streamlit_detection_tracking_video_service_default_ui_update_interval",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L268",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_render",
+      "target": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L801",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_play_stored_video",
+      "target": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L852",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_play_webcam",
+      "target": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L965",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_play_rtsp",
+      "target": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L1000",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_play_youtube",
+      "target": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L175",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_175",
+      "target": "yolov8_streamlit_detection_tracking_video_service_performance_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L154",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_render",
+      "target": "yolov8_streamlit_detection_tracking_video_service_world_class_input"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L158",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_render",
+      "target": "yolov8_streamlit_detection_tracking_video_service_yoloe_class_input"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L170",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_render",
+      "target": "yolov8_streamlit_detection_tracking_video_service_tracker_options"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L229",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_229",
+      "target": "yolov8_streamlit_detection_tracking_video_service_render",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L153",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_153",
+      "target": "yolov8_streamlit_detection_tracking_video_service_render"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L148",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_148",
+      "target": "yolov8_streamlit_detection_tracking_video_service_render"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L294",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_294",
+      "target": "yolov8_streamlit_detection_tracking_video_service_yoloe_class_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L211",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_211",
+      "target": "yolov8_streamlit_detection_tracking_video_service_yoloe_class_input"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L199",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_199",
+      "target": "yolov8_streamlit_detection_tracking_video_service_yoloe_class_input"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L338",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_338",
+      "target": "yolov8_streamlit_detection_tracking_video_service_tracker_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L255",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_255",
+      "target": "yolov8_streamlit_detection_tracking_video_service_tracker_options"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L243",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_243",
+      "target": "yolov8_streamlit_detection_tracking_video_service_tracker_options"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L306",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_process_frame",
+      "target": "yolov8_streamlit_detection_tracking_video_service_draw_overlay"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L457",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_run_video_loop",
+      "target": "yolov8_streamlit_detection_tracking_video_service_process_frame"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L579",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_run_multi_video_loop",
+      "target": "yolov8_streamlit_detection_tracking_video_service_process_frame"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L365",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_365",
+      "target": "yolov8_streamlit_detection_tracking_video_service_process_frame",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L280",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_280",
+      "target": "yolov8_streamlit_detection_tracking_video_service_process_frame"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L267",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_267",
+      "target": "yolov8_streamlit_detection_tracking_video_service_process_frame"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L436",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_436",
+      "target": "yolov8_streamlit_detection_tracking_video_service_draw_overlay",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L342",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_342",
+      "target": "yolov8_streamlit_detection_tracking_video_service_draw_overlay"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L323",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_323",
+      "target": "yolov8_streamlit_detection_tracking_video_service_draw_overlay"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L380",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_livemetrics",
+      "target": "yolov8_streamlit_detection_tracking_video_service_livemetrics_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L395",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_livemetrics",
+      "target": "yolov8_streamlit_detection_tracking_video_service_livemetrics_update"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L433",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_run_video_loop",
+      "target": "yolov8_streamlit_detection_tracking_video_service_livemetrics"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L491",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_491",
+      "target": "yolov8_streamlit_detection_tracking_video_service_livemetrics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L397",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_397",
+      "target": "yolov8_streamlit_detection_tracking_video_service_livemetrics"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L378",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_378",
+      "target": "yolov8_streamlit_detection_tracking_video_service_livemetrics"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L474",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_run_video_loop",
+      "target": "yolov8_streamlit_detection_tracking_video_service_livemetrics_update"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L657",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_play_stored_video",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_video_loop"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L792",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_play_rtsp",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_video_loop"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L823",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_play_youtube",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_video_loop"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L543",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_543",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_video_loop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L448",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_448",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_video_loop"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L428",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_428",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_video_loop"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L666",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_play_stored_video",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_multi_video_loop"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L643",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_643",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_multi_video_loop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L540",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_540",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_multi_video_loop"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L518",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_518",
+      "target": "yolov8_streamlit_detection_tracking_video_service_run_multi_video_loop"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L834",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_834",
+      "target": "yolov8_streamlit_detection_tracking_video_service_play_webcam",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L716",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_716",
+      "target": "yolov8_streamlit_detection_tracking_video_service_play_webcam"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L689",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_rationale_689",
+      "target": "yolov8_streamlit_detection_tracking_video_service_play_webcam"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "video_service.py",
+      "source_location": "L822",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_video_service_play_youtube",
+      "target": "yolov8_streamlit_detection_tracking_video_service_get_youtube_stream"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify_torch_cuda.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_torch_cuda_py",
+      "target": "scripts_verify_torch_cuda_main"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_md",
+      "target": "yolov8_streamlit_detection_tracking_agents_graphify"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "readme_md",
+      "target": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_what_s_new_in_v2_0"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_features"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_demo"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L82",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_quick_start"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L136",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_usage_guide"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L172",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_project_structure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L202",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_configuration"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L237",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_deploy_to_streamlit_cloud"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L248",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_contributing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L268",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_resources"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L279",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_license"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L283",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_yolo_vision_studio",
+      "target": "yolov8_streamlit_detection_tracking_readme_acknowledgements"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_features",
+      "target": "yolov8_streamlit_detection_tracking_readme_image_inference"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_features",
+      "target": "yolov8_streamlit_detection_tracking_readme_video_inference"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_features",
+      "target": "yolov8_streamlit_detection_tracking_readme_architecture"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_demo",
+      "target": "yolov8_streamlit_detection_tracking_readme_tracking_with_object_detection"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L71",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_demo",
+      "target": "yolov8_streamlit_detection_tracking_readme_application_overview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_demo",
+      "target": "yolov8_streamlit_detection_tracking_readme_screenshots"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_quick_start",
+      "target": "yolov8_streamlit_detection_tracking_readme_prerequisites"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L90",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_quick_start",
+      "target": "yolov8_streamlit_detection_tracking_readme_installation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_quick_start",
+      "target": "yolov8_streamlit_detection_tracking_readme_windows_nvidia_gpu_setup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_quick_start",
+      "target": "yolov8_streamlit_detection_tracking_readme_download_model_weights"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L126",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_quick_start",
+      "target": "yolov8_streamlit_detection_tracking_readme_run_the_app"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L92",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_installation",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L110",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_windows_nvidia_gpu_setup",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L112",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_download_model_weights",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_download_model_weights",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L128",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_run_the_app",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L140",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_run_the_app",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_4"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L174",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_project_structure",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_4"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L138",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_usage_guide",
+      "target": "yolov8_streamlit_detection_tracking_readme_sidebar_controls"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_usage_guide",
+      "target": "yolov8_streamlit_detection_tracking_readme_image_inference_162",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L170",
+      "weight": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_usage_guide",
+      "target": "yolov8_streamlit_detection_tracking_readme_video_inference_170",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L166",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_usage_guide",
+      "target": "yolov8_streamlit_detection_tracking_readme_adding_your_own_videos"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L161",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_usage_guide",
+      "target": "yolov8_streamlit_detection_tracking_readme_image_inference_161"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L169",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_usage_guide",
+      "target": "yolov8_streamlit_detection_tracking_readme_video_inference_169"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L148",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_usage_guide",
+      "target": "yolov8_streamlit_detection_tracking_readme_image_inference_148"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L156",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_usage_guide",
+      "target": "yolov8_streamlit_detection_tracking_readme_video_inference_156"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L187",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_project_structure",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_5"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L190",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_project_structure",
+      "target": "yolov8_streamlit_detection_tracking_readme_module_responsibilities"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L206",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_configuration",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_5"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L220",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_configuration",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_6"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L225",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_configuration",
+      "target": "yolov8_streamlit_detection_tracking_readme_custom_models"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L229",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_custom_models",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_6"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L243",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_custom_models",
+      "target": "yolov8_streamlit_detection_tracking_readme_codeblock_7"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L258",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "yolov8_streamlit_detection_tracking_readme_contributing",
+      "target": "yolov8_streamlit_detection_tracking_readme_ideas_for_contributions"
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "a68502830856f1eb88a4a29f4bee1f04c417b203"
+}
