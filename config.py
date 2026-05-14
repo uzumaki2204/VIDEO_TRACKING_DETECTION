@@ -238,6 +238,16 @@ TRACK_LIVE_EXPORT_INTERVAL_FAST_S = 90.0
 TRACK_LIVE_EXPORT_INTERVAL_FULL_S = 30.0
 FAST_TRACKING_RETENTION_FRAMES = 1800
 
+# ─── Video Processing Profiles ────────────────────────────────────────────────
+VIDEO_PROFILE_INTERACTIVE = "Interactive"
+VIDEO_PROFILE_BATCH_FAST = "Batch Fast (Long Video)"
+VIDEO_PROCESSING_PROFILES = [
+    VIDEO_PROFILE_INTERACTIVE,
+    VIDEO_PROFILE_BATCH_FAST,
+]
+DEFAULT_VIDEO_PROCESSING_PROFILE = VIDEO_PROFILE_INTERACTIVE
+BATCH_FAST_METRICS_UPDATE_INTERVAL = 240
+
 # ─── YOLO World v2 Defaults ───────────────────────────────────────────────────
 # Supports natural language prompts like "person in black", "red car", etc.
 # DEFAULT_WORLD_CLASSES = "person, car, dog, cat, chair, table, laptop, phone"

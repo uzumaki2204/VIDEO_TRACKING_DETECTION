@@ -2177,16 +2177,15 @@ def _video_processing_profile_mode_options(source: str) -> str:
         index=default_index,
         help=(
             "Interactive keeps the current preview-first workflow. "
-            "Batch Fast is tuned for long stored videos, keeps grab-skip plus no "
-            "live preview, and still allows tracking exports when needed."
+            "Batch Fast is tuned for long stored videos and disables live preview "
+            "plus detailed tracking export to maximize throughput."
         ),
         key="video_processing_profile",
     )
     if selected == config.VIDEO_PROFILE_BATCH_FAST:
         st.sidebar.caption(
             "Batch Fast uses grab-skip, turns off live frame rendering, and keeps "
-            "tracking in fast runtime mode for better long-video throughput while "
-            "still allowing crop/CSV/HTML exports."
+            "tracking in minimal mode for better long-video throughput."
         )
     return selected
 
@@ -2201,7 +2200,7 @@ def _video_processing_profile_options(
             show_source_preview=False,
             use_grab_skip=True,
             metrics_update_interval=config.BATCH_FAST_METRICS_UPDATE_INTERVAL,
-            allow_tracking_exports=True,
+            allow_tracking_exports=False,
             force_fast_tracking=True,
         )
 
@@ -2246,10 +2245,7 @@ def _tracking_runtime_options(
     )
     fast_mode = force_fast or mode == config.TRACK_RUNTIME_FAST
     effective_mode = config.TRACK_RUNTIME_FAST if fast_mode else mode
-    # Fast mode can still keep export history when a run has an output directory.
-    # The "fast" part here is the reduced preview/live snapshot behavior, not
-    # dropping the final CSV/HTML artifacts for stored-video runs.
-    keep_full_history = has_output_dir or not fast_mode
+    keep_full_history = (has_output_dir and not force_fast) or not fast_mode
     return _TrackingRuntimeOptions(
         mode=effective_mode,
         keep_full_history=keep_full_history,
@@ -3103,7 +3099,10 @@ def _play_stored_video(
         save_track_crops = st.sidebar.checkbox(
             "Save Object Crops",
             value=config.DEFAULT_SAVE_TRACK_CROPS,
-            disabled=(execution_mode == config.STORED_MODE_MULTI),
+            disabled=(
+                execution_mode == config.STORED_MODE_MULTI
+                or not processing_profile.allow_tracking_exports
+            ),
             help=(
                 "Save one cropped object image for the first frame of each continuous "
                 "tracking segment. Available in Single Video and Queue Sequential mode."
@@ -3113,6 +3112,11 @@ def _play_stored_video(
         if execution_mode == config.STORED_MODE_MULTI:
             st.sidebar.caption(
                 "Crop saving is available only in Single Video and Queue Sequential mode."
+            )
+        elif not processing_profile.allow_tracking_exports:
+            st.sidebar.caption(
+                "Batch Fast disables crop saving and detailed tracking exports to keep "
+                "throughput high on long videos."
             )
 
     if not vid_names:
@@ -3162,7 +3166,7 @@ def _play_stored_video(
                 return
             run_output_dir = (
                 _create_tracking_run_dir(task)
-                if enable_tracking
+                if enable_tracking and processing_profile.allow_tracking_exports
                 else None
             )
             video_dir = (
@@ -3190,12 +3194,17 @@ def _play_stored_video(
                 _persist_video_tracking_outputs(result, video_dir, live=False, write_archives=True)
             if processing_profile.allow_tracking_exports:
                 _render_tracking_exports([result], enable_tracking, output_dir=run_output_dir)
+            elif enable_tracking:
+                st.info(
+                    "Batch Fast completed with minimal tracking only. Detailed CSV/HTML "
+                    "tracking export is disabled in this profile."
+                )
             return
 
         if execution_mode == config.STORED_MODE_QUEUE:
             run_output_dir = (
                 _create_tracking_run_dir(task)
-                if enable_tracking
+                if enable_tracking and processing_profile.allow_tracking_exports
                 else None
             )
             results = _run_video_queue(
@@ -3216,6 +3225,11 @@ def _play_stored_video(
                 video_processing_profile=video_processing_profile,
             )
             _render_queue_output_summary(results, run_output_dir)
+            if enable_tracking and not processing_profile.allow_tracking_exports:
+                st.info(
+                    "Batch Fast queue mode keeps tracking minimal and skips detailed "
+                    "tracking export artifacts to maximize throughput."
+                )
             return
 
         if len(vid_names) == 1:
