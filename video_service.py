@@ -340,7 +340,7 @@ def _default_ui_update_interval(device: str) -> int:
 def _performance_options(device: str) -> _PerformanceOptions:
     """Collect runtime knobs that shift work from CPU-bound UI to GPU inference."""
     using_gpu = device.startswith("cuda")
-    with st.sidebar.expander("⚙️ Performance", expanded=using_gpu):
+    with st.sidebar.expander("4. Performance", expanded=using_gpu):
         imgsz = st.slider(
             "Inference Size",
             min_value=config.MIN_INFERENCE_IMGSZ,
@@ -2035,6 +2035,7 @@ def render(
 ) -> None:
     """Render the full video-inference page for the chosen *task*."""
     st.header(f"🎬 Video · {task}")
+    st.caption("Sidebar được chia theo nguồn video, tracking và hiệu năng để giảm nhầm lẫn khi cấu hình.")
     resolved_device = resolve_device(device)
 
     # YOLO World / YOLOE text prompt
@@ -2058,22 +2059,23 @@ def render(
         return
 
     # Video source
-    source = st.sidebar.radio("📹 Video Source", config.VIDEO_SOURCES, key="vid_source")
-    video_processing_profile = _video_processing_profile_mode_options(source)
+    with st.sidebar.expander("3. Source & Tracking", expanded=True):
+        source = st.radio("Video Source", config.VIDEO_SOURCES, key="vid_source")
+        video_processing_profile = _video_processing_profile_mode_options(source)
 
-    # Tracking options (enabled by default)
-    enable_tracking, tracker = _tracker_options()
-    tracking_runtime_mode = _tracking_runtime_mode_options(enable_tracking)
+        # Tracking options (enabled by default)
+        enable_tracking, tracker = _tracker_options()
+        tracking_runtime_mode = _tracking_runtime_mode_options(enable_tracking)
 
-    # Skip frames slider for faster inference
-    skip_frames = st.sidebar.slider(
-        "⏩ Skip Frames",
-        min_value=config.MIN_SKIP_FRAMES,
-        max_value=config.MAX_SKIP_FRAMES,
-        value=config.DEFAULT_SKIP_FRAMES,
-        help="Process every Nth frame. Higher = faster but less smooth.",
-        key="skip_frames",
-    )
+        # Skip frames slider for faster inference
+        skip_frames = st.slider(
+            "Skip Frames",
+            min_value=config.MIN_SKIP_FRAMES,
+            max_value=config.MAX_SKIP_FRAMES,
+            value=config.DEFAULT_SKIP_FRAMES,
+            help="Process every Nth frame. Higher = faster but less smooth.",
+            key="skip_frames",
+        )
     perf = _performance_options(resolved_device)
     if perf.half and not _supports_half_precision(task):
         perf = replace(perf, half=False)
@@ -2153,10 +2155,10 @@ def _world_class_input() -> list[str] | None:
 
 def _tracker_options() -> tuple[bool, str | None]:
     """Sidebar widgets for tracker selection."""
-    enable = st.sidebar.checkbox("Enable Object Tracking", value=True)
+    enable = st.checkbox("Enable Object Tracking", value=True)
     tracker = None
     if enable:
-        tracker = st.sidebar.radio(
+        tracker = st.radio(
             "Tracker Algorithm",
             config.TRACKERS_LIST,
             key="tracker_algo",
@@ -2171,7 +2173,7 @@ def _video_processing_profile_mode_options(source: str) -> str:
     default_index = config.VIDEO_PROCESSING_PROFILES.index(
         config.DEFAULT_VIDEO_PROCESSING_PROFILE
     )
-    selected = st.sidebar.radio(
+    selected = st.radio(
         "Video Processing Profile",
         config.VIDEO_PROCESSING_PROFILES,
         index=default_index,
@@ -2183,7 +2185,7 @@ def _video_processing_profile_mode_options(source: str) -> str:
         key="video_processing_profile",
     )
     if selected == config.VIDEO_PROFILE_BATCH_FAST:
-        st.sidebar.caption(
+        st.caption(
             "Batch Fast uses grab-skip, turns off live frame rendering, and keeps "
             "tracking in fast runtime mode for better long-video throughput while "
             "still allowing crop/CSV/HTML exports."
@@ -2221,7 +2223,7 @@ def _tracking_runtime_mode_options(enable_tracking: bool) -> str:
         return config.DEFAULT_TRACK_RUNTIME_MODE
 
     default_index = config.TRACK_RUNTIME_MODES.index(config.DEFAULT_TRACK_RUNTIME_MODE)
-    return st.sidebar.radio(
+    return st.radio(
         "Tracking Runtime Mode",
         config.TRACK_RUNTIME_MODES,
         index=default_index,
@@ -3038,15 +3040,16 @@ def _play_stored_video(
 ) -> None:
     processing_profile = _video_processing_profile_options(video_processing_profile)
     default_video_path = _format_output_path(config.VIDEOS_DIR) or str(config.VIDEOS_DIR)
-    selected_video_path = st.sidebar.text_input(
-        "Video Folder or File Path",
-        value=default_video_path,
-        help=(
-            "Nhập đường dẫn thư mục chứa video hoặc một file video cụ thể. "
-            "Đường dẫn tương đối sẽ được tính từ thư mục gốc của project."
-        ),
-        key="stored_video_path",
-    )
+    with st.sidebar.expander("5. Stored Video Setup", expanded=True):
+        selected_video_path = st.text_input(
+            "Video Folder or File Path",
+            value=default_video_path,
+            help=(
+                "Nhập đường dẫn thư mục chứa video hoặc một file video cụ thể. "
+                "Đường dẫn tương đối sẽ được tính từ thư mục gốc của project."
+            ),
+            key="stored_video_path",
+        )
     resolved_video_path = config.resolve_video_path(selected_video_path)
 
     # Scan the chosen path on every run so new videos appear immediately
@@ -3059,61 +3062,62 @@ def _play_stored_video(
             st.warning(f"Video path does not exist: `{resolved_video_path}`")
         return
 
-    st.sidebar.caption(f"Scanning videos from: `{resolved_video_path}`")
-    with st.sidebar.expander("Recover Tracking HTML", expanded=False):
-        recover_output_path = st.text_input(
-            "Tracking Output Folder",
-            value="",
-            help=(
-                "Nhập thư mục output của 1 video hoặc cả run queue. "
-                "Nếu app crash, hệ thống sẽ ưu tiên rebuild HTML từ CSV đã ghi; "
-                "nếu không còn CSV thì fallback sang ảnh trong folder `crops/`."
-            ),
-            key="recover_tracking_output_path",
-        )
-        if st.button("Rebuild HTML From Saved Data", key="recover_tracking_html_button"):
-            target_path = _resolve_project_path(recover_output_path)
-            if target_path is None:
-                st.warning("Please enter a tracking output folder path first.")
-            else:
-                ok, message = _recover_tracking_outputs(target_path)
-                if ok:
-                    st.success(message)
-                else:
-                    st.warning(message)
-
-    vid_names = st.sidebar.multiselect(
-        "Choose video(s)",
-        list(videos.keys()),
-        default=[list(videos.keys())[0]],
-        help="Select multiple videos for simultaneous detection.",
-    )
-    execution_mode = st.sidebar.radio(
-        "Stored Video Execution",
-        config.STORED_VIDEO_MODES,
-        index=0,
-        help=(
-            "Single Video = one file. Multi Simultaneous = side-by-side. "
-            "Queue Sequential = process selected videos one after another."
-        ),
-        key="stored_video_execution_mode",
-    )
-    save_track_crops = False
-    if enable_tracking:
-        save_track_crops = st.sidebar.checkbox(
-            "Save Object Crops",
-            value=config.DEFAULT_SAVE_TRACK_CROPS,
-            disabled=(execution_mode == config.STORED_MODE_MULTI),
-            help=(
-                "Save one cropped object image for the first frame of each continuous "
-                "tracking segment. Available in Single Video and Queue Sequential mode."
-            ),
-            key="save_track_crops",
-        )
-        if execution_mode == config.STORED_MODE_MULTI:
-            st.sidebar.caption(
-                "Crop saving is available only in Single Video and Queue Sequential mode."
+    with st.sidebar.expander("5. Stored Video Setup", expanded=True):
+        st.caption(f"Scanning videos from: `{resolved_video_path}`")
+        with st.expander("Recover Tracking HTML", expanded=False):
+            recover_output_path = st.text_input(
+                "Tracking Output Folder",
+                value="",
+                help=(
+                    "Nhập thư mục output của 1 video hoặc cả run queue. "
+                    "Nếu app crash, hệ thống sẽ ưu tiên rebuild HTML từ CSV đã ghi; "
+                    "nếu không còn CSV thì fallback sang ảnh trong folder `crops/`."
+                ),
+                key="recover_tracking_output_path",
             )
+            if st.button("Rebuild HTML From Saved Data", key="recover_tracking_html_button"):
+                target_path = _resolve_project_path(recover_output_path)
+                if target_path is None:
+                    st.warning("Please enter a tracking output folder path first.")
+                else:
+                    ok, message = _recover_tracking_outputs(target_path)
+                    if ok:
+                        st.success(message)
+                    else:
+                        st.warning(message)
+
+        vid_names = st.multiselect(
+            "Choose video(s)",
+            list(videos.keys()),
+            default=[list(videos.keys())[0]],
+            help="Select multiple videos for simultaneous detection.",
+        )
+        execution_mode = st.radio(
+            "Stored Video Execution",
+            config.STORED_VIDEO_MODES,
+            index=0,
+            help=(
+                "Single Video = one file. Multi Simultaneous = side-by-side. "
+                "Queue Sequential = process selected videos one after another."
+            ),
+            key="stored_video_execution_mode",
+        )
+        save_track_crops = False
+        if enable_tracking:
+            save_track_crops = st.checkbox(
+                "Save Object Crops",
+                value=config.DEFAULT_SAVE_TRACK_CROPS,
+                disabled=(execution_mode == config.STORED_MODE_MULTI),
+                help=(
+                    "Save one cropped object image for the first frame of each continuous "
+                    "tracking segment. Available in Single Video and Queue Sequential mode."
+                ),
+                key="save_track_crops",
+            )
+            if execution_mode == config.STORED_MODE_MULTI:
+                st.caption(
+                    "Crop saving is available only in Single Video and Queue Sequential mode."
+                )
 
     if not vid_names:
         st.info("Select at least one video from the sidebar.")
@@ -3153,7 +3157,10 @@ def _play_stored_video(
                     st.markdown(f"**{name}**")
                     st.video(str(videos[name]))
 
-    if st.sidebar.button("🚀 Detect Video Objects", type="primary"):
+    with st.sidebar.expander("6. Run", expanded=True):
+        run_detect = st.button("🚀 Detect Video Objects", type="primary", width="stretch")
+
+    if run_detect:
         runtime_perf = perf or _performance_options(device)
 
         if execution_mode == config.STORED_MODE_SINGLE:
@@ -3402,11 +3409,14 @@ def _play_rtsp(
     tracking_runtime_mode: str = config.DEFAULT_TRACK_RUNTIME_MODE,
     video_processing_profile: str = config.DEFAULT_VIDEO_PROCESSING_PROFILE,
 ) -> None:
-    url = st.sidebar.text_input(
-        "RTSP Stream URL",
-        placeholder="rtsp://admin:12345@192.168.1.210:554/Streaming/Channels/101",
-    )
-    if st.sidebar.button("🚀 Start RTSP Stream", type="primary"):
+    with st.sidebar.expander("5. RTSP Setup", expanded=True):
+        url = st.text_input(
+            "RTSP Stream URL",
+            placeholder="rtsp://admin:12345@192.168.1.210:554/Streaming/Channels/101",
+        )
+    with st.sidebar.expander("6. Run", expanded=True):
+        run_stream = st.button("🚀 Start RTSP Stream", type="primary", width="stretch")
+    if run_stream:
         if not url:
             st.sidebar.error("Please enter an RTSP URL.")
             return
@@ -3439,10 +3449,13 @@ def _play_youtube(
     tracking_runtime_mode: str = config.DEFAULT_TRACK_RUNTIME_MODE,
     video_processing_profile: str = config.DEFAULT_VIDEO_PROCESSING_PROFILE,
 ) -> None:
-    url = st.sidebar.text_input(
-        "YouTube URL", placeholder="https://www.youtube.com/watch?v=..."
-    )
-    if st.sidebar.button("🚀 Detect YouTube Video", type="primary"):
+    with st.sidebar.expander("5. YouTube Setup", expanded=True):
+        url = st.text_input(
+            "YouTube URL", placeholder="https://www.youtube.com/watch?v=..."
+        )
+    with st.sidebar.expander("6. Run", expanded=True):
+        run_detect = st.button("🚀 Detect YouTube Video", type="primary", width="stretch")
+    if run_detect:
         if not url:
             st.sidebar.error("Please enter a YouTube URL.")
             return
