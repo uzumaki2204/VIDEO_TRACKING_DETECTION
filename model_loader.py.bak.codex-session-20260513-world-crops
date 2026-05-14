@@ -123,35 +123,6 @@ def _ensure_device(model, requested_device: str | None = None) -> str:
     return device
 
 
-def _invalidate_predictor(model) -> None:
-    """Force Ultralytics to rebuild the predictor after a class/prompt change."""
-    if hasattr(model, "predictor"):
-        model.predictor = None
-
-
-def _prepare_prompt_model_for_class_reset(model) -> None:
-    """Reset a text-prompt model to CPU float32 before ``set_classes()``.
-
-    After a CUDA inference with ``half=True``, cached prompt-based models can keep
-    CLIP/text-encoder weights in ``float16``. Moving that model back to CPU is not
-    enough by itself because the dtype stays ``float16``, which later breaks
-    ``set_classes()`` on CPU with a mixed-dtype error.
-    """
-    _invalidate_predictor(model)
-
-    if hasattr(model, "model") and hasattr(model.model, "to"):
-        model.model.to("cpu")
-    model.to("cpu")
-
-    if hasattr(model, "model") and hasattr(model.model, "float"):
-        model.model.float()
-    if hasattr(model, "float"):
-        model.float()
-
-    if hasattr(model, "model") and hasattr(model.model, "txt_feats"):
-        model.model.txt_feats = None
-
-
 def _set_world_classes(
     model: YOLOWorld,
     classes: list[str],
@@ -168,13 +139,13 @@ def _set_world_classes(
     setting classes, because freshly loaded models start on CPU and
     ``predict()`` alone may not move the text-embedding tensors.
     """
-    # 1. CPU float32 so text embeddings are regenerated without mixed dtypes
-    _prepare_prompt_model_for_class_reset(model)
+    # 1. CPU so set_classes creates embeddings on the same device as weights
+    model.to("cpu")
     model.set_classes(classes)
 
-    # 2. Move everything (weights + fresh text embeddings) to the target device
-    _invalidate_predictor(model)
-    _ensure_device(model, requested_device=requested_device)
+    # 2. Move everything (weights + fresh text embeddings) to best device
+    best = resolve_device(requested_device)
+    model.to(best)
 
 
 def _set_yoloe_classes(
@@ -187,10 +158,10 @@ def _set_yoloe_classes(
     Same pattern as ``_set_world_classes`` but for YOLOE.
     YOLOE supports category-level labels (not descriptive phrases).
     """
-    _prepare_prompt_model_for_class_reset(model)
+    model.to("cpu")
     model.set_classes(classes)
-    _invalidate_predictor(model)
-    _ensure_device(model, requested_device=requested_device)
+    best = resolve_device(requested_device)
+    model.to(best)
 
 
 def get_model_for_task(

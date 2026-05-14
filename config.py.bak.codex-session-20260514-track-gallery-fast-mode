@@ -229,15 +229,6 @@ TRACKER_BOTSORT = "botsort.yaml"
 TRACKERS_LIST = [TRACKER_BYTETRACK, TRACKER_BOTSORT]
 TRACK_GROUP_GAP_MS = 3000
 
-# ─── Tracking Runtime ─────────────────────────────────────────────────────────
-TRACK_RUNTIME_FAST = "Fast"
-TRACK_RUNTIME_FULL = "Full"
-TRACK_RUNTIME_MODES = [TRACK_RUNTIME_FAST, TRACK_RUNTIME_FULL]
-DEFAULT_TRACK_RUNTIME_MODE = TRACK_RUNTIME_FAST
-TRACK_LIVE_EXPORT_INTERVAL_FAST_S = 90.0
-TRACK_LIVE_EXPORT_INTERVAL_FULL_S = 30.0
-FAST_TRACKING_RETENTION_FRAMES = 1800
-
 # ─── YOLO World v2 Defaults ───────────────────────────────────────────────────
 # Supports natural language prompts like "person in black", "red car", etc.
 # DEFAULT_WORLD_CLASSES = "person, car, dog, cat, chair, table, laptop, phone"

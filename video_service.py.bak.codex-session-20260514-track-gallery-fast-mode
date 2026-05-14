@@ -58,6 +58,7 @@ _TRACK_COLORS = [
 ]
 _TRACK_PREVIEW_MAX_SIDE = 320
 _TRACK_PREVIEW_JPEG_QUALITY = 85
+_TRACK_LIVE_EXPORT_INTERVAL_S = 30.0
 _PREVIEW_HIDDEN_COLUMNS = {"preview", "preview_crop_path"}
 _TRACK_CROP_FILE_RE = re.compile(
     r"^(?P<image_id>.+)__track_(?P<track_id>\d+)__segment_(?P<segment_index>\d+)\.[^.]+$"
@@ -156,59 +157,6 @@ class _SavedCropInfo:
     image_id: str
     crop_path: str | None
     preview_data_url: str | None
-
-
-@dataclass(frozen=True)
-class _TrackingRuntimeOptions:
-    mode: str
-    keep_full_history: bool
-    live_export_interval_s: float
-    eager_live_snapshot_on_new_crop: bool
-    recent_track_window_frames: int | None
-
-
-class _TrackingMetricsState:
-    def __init__(
-        self,
-        *,
-        retain_all_time: bool,
-        recent_window_frames: int | None = None,
-    ) -> None:
-        self.retain_all_time = retain_all_time
-        self.recent_window_frames = recent_window_frames
-        self.tracked_ids: set[int] = set()
-        self.class_tracked: dict[str, set[int]] = defaultdict(set)
-        self._last_seen_by_track: dict[int, tuple[str, int]] = {}
-
-    @property
-    def tracked_total(self) -> int:
-        return len(self.tracked_ids)
-
-    def observe(self, track_id: int, class_name: str, frame_num: int) -> None:
-        self.tracked_ids.add(track_id)
-        self.class_tracked.setdefault(class_name, set()).add(track_id)
-        if not self.retain_all_time:
-            self._last_seen_by_track[track_id] = (class_name, frame_num)
-
-    def prune(self, frame_num: int) -> None:
-        if self.retain_all_time or self.recent_window_frames is None:
-            return
-
-        stale_before = frame_num - self.recent_window_frames
-        stale_track_ids = [
-            track_id
-            for track_id, (_, last_seen_frame) in self._last_seen_by_track.items()
-            if last_seen_frame < stale_before
-        ]
-        for track_id in stale_track_ids:
-            class_name, _ = self._last_seen_by_track.pop(track_id)
-            self.tracked_ids.discard(track_id)
-            class_ids = self.class_tracked.get(class_name)
-            if class_ids is None:
-                continue
-            class_ids.discard(track_id)
-            if not class_ids:
-                self.class_tracked.pop(class_name, None)
 
 
 # ── Custom annotation with track IDs on bounding boxes ───────────────────────
@@ -547,24 +495,6 @@ def _mime_type_to_extension(mime_type: str) -> str:
         "image/png": ".png",
         "image/webp": ".webp",
     }.get(mime_type.lower(), ".bin")
-
-
-def _mime_type_from_extension(extension: str) -> str:
-    return {
-        ".jpg": "image/jpeg",
-        ".jpeg": "image/jpeg",
-        ".png": "image/png",
-        ".webp": "image/webp",
-    }.get(extension.lower(), "application/octet-stream")
-
-
-def _crop_path_to_data_url(crop_path: str) -> str:
-    crop_source = _resolve_project_path(crop_path)
-    if crop_source is None or not crop_source.exists() or not crop_source.is_file():
-        return ""
-    encoded = base64.b64encode(crop_source.read_bytes()).decode("ascii")
-    mime_type = _mime_type_from_extension(crop_source.suffix)
-    return f"data:{mime_type};base64,{encoded}"
 
 
 def _preview_export_filename(
@@ -999,6 +929,7 @@ def _build_tracking_events(
         if is_new_segment:
             crop = _crop_box_from_frame(frame, obs.bbox_xyxy)
             if crop is not None:
+                preview_data_url = _crop_to_data_url(crop)
                 crop_path: str | None = None
                 if save_track_crops and crops_dir is not None:
                     crop_path = _save_segment_crop(
@@ -1008,7 +939,6 @@ def _build_tracking_events(
                         track_id=obs.track_id,
                         segment_index=segment_index,
                     )
-                preview_data_url = None if crop_path else _crop_to_data_url(crop)
                 if preview_data_url or crop_path:
                     saved_crops[(video_name, queue_index, obs.track_id, segment_index)] = (
                         _SavedCropInfo(
@@ -1288,80 +1218,6 @@ def _build_preview_rows(
     return grouped_preview_rows, raw_preview_rows
 
 
-def _safe_int(value: object, default: int = 0) -> int:
-    try:
-        text = "" if value is None else str(value).strip()
-        return int(text) if text else default
-    except (TypeError, ValueError):
-        return default
-
-
-def _build_track_gallery_rows(grouped_preview_rows: list[dict[str, object]]) -> list[dict[str, object]]:
-    gallery_by_track: dict[tuple[str, int, int], dict[str, object]] = {}
-
-    for row in grouped_preview_rows:
-        video_name = str(row.get("video_name") or "").strip()
-        queue_index = _safe_int(row.get("queue_index"), 0)
-        track_id = _safe_int(row.get("track_id"), -1)
-        if track_id < 0:
-            continue
-
-        segment_id = str(row.get("segment_id") or "").strip()
-        class_name = str(row.get("class_name") or "").strip() or "unknown"
-        start_time = str(row.get("start_time") or "").strip()
-        end_time = str(row.get("end_time") or "").strip()
-        representative_image_id = str(row.get("representative_image_id") or "").strip()
-        preview_data_url = str(row.get("preview") or "").strip()
-        preview_crop_path = _preview_crop_path_from_row(row)
-        hits = max(_safe_int(row.get("hits"), 1), 1)
-
-        key = (video_name, queue_index, track_id)
-        existing = gallery_by_track.get(key)
-        if existing is None:
-            gallery_by_track[key] = {
-                "preview": preview_data_url,
-                "preview_crop_path": preview_crop_path,
-                "video_name": video_name,
-                "queue_index": queue_index,
-                "track_id": track_id,
-                "class_name": class_name,
-                "segments": 1,
-                "total_hits": hits,
-                "first_seen": start_time,
-                "last_seen": end_time or start_time,
-                "representative_segment_id": segment_id,
-                "representative_image_id": representative_image_id,
-            }
-            continue
-
-        existing["segments"] = int(existing["segments"]) + 1
-        existing["total_hits"] = int(existing["total_hits"]) + hits
-        if end_time:
-            existing["last_seen"] = end_time
-        if not str(existing.get("preview") or "").strip() and preview_data_url:
-            existing["preview"] = preview_data_url
-        if not str(existing.get("preview_crop_path") or "").strip() and preview_crop_path:
-            existing["preview_crop_path"] = preview_crop_path
-        if str(existing.get("class_name") or "").strip() in ("", "unknown") and class_name:
-            existing["class_name"] = class_name
-        if not str(existing.get("representative_segment_id") or "").strip() and segment_id:
-            existing["representative_segment_id"] = segment_id
-        if (
-            not str(existing.get("representative_image_id") or "").strip()
-            and representative_image_id
-        ):
-            existing["representative_image_id"] = representative_image_id
-
-    return sorted(
-        gallery_by_track.values(),
-        key=lambda item: (
-            _safe_int(item.get("queue_index"), 0),
-            _safe_int(item.get("track_id"), 0),
-            str(item.get("video_name") or ""),
-        ),
-    )
-
-
 def _persist_video_tracking_outputs(
     result: _VideoRunResult,
     video_output_dir: Path,
@@ -1374,7 +1230,6 @@ def _persist_video_tracking_outputs(
 
     rows = _result_export_rows(result)
     grouped_preview_rows, raw_preview_rows = _build_preview_rows([result])
-    track_gallery_rows = _build_track_gallery_rows(grouped_preview_rows)
     raw_preview_export_rows = raw_preview_rows[:200]
     live_suffix = "_live" if live else ""
     title_suffix = " (Live)" if live else ""
@@ -1394,11 +1249,6 @@ def _persist_video_tracking_outputs(
         raw_preview_export_rows,
         video_output_dir / f"raw_preview{live_suffix}",
     )
-    _write_preview_export_directory(
-        f"{result.video_name} · Track Gallery{title_suffix}",
-        track_gallery_rows,
-        video_output_dir / f"track_gallery{live_suffix}",
-    )
 
     if live or not write_archives:
         return
@@ -1415,13 +1265,6 @@ def _persist_video_tracking_outputs(
             f"{result.video_name} · Raw Preview (Top 200 Rows)",
             raw_preview_export_rows,
             archive_root_name="tracking_raw_preview",
-        )
-    )
-    (video_output_dir / "tracking_track_gallery_html.zip").write_bytes(
-        _build_preview_export_zip(
-            f"{result.video_name} · Track Gallery",
-            track_gallery_rows,
-            archive_root_name="tracking_track_gallery",
         )
     )
 
@@ -1456,15 +1299,6 @@ def _write_queue_index(entries: list[dict[str, object]], run_output_dir: Path) -
                 "recovered_from_csv/raw_preview/index.html",
             ],
         )
-        track_gallery_link = _queue_preview_link(
-            video_dir,
-            [
-                "track_gallery/index.html",
-                "track_gallery_live/index.html",
-                "recovered_from_csv/track_gallery/index.html",
-                "recovered_from_crops/track_gallery/index.html",
-            ],
-        )
         grouped_cell = (
             f'<a href="{html.escape(grouped_link, quote=True)}">Grouped HTML</a>'
             if grouped_link
@@ -1473,11 +1307,6 @@ def _write_queue_index(entries: list[dict[str, object]], run_output_dir: Path) -
         raw_cell = (
             f'<a href="{html.escape(raw_link, quote=True)}">Raw HTML</a>'
             if raw_link
-            else '<span class="empty">—</span>'
-        )
-        track_gallery_cell = (
-            f'<a href="{html.escape(track_gallery_link, quote=True)}">Track Gallery</a>'
-            if track_gallery_link
             else '<span class="empty">—</span>'
         )
         body_rows.append(
@@ -1489,7 +1318,6 @@ def _write_queue_index(entries: list[dict[str, object]], run_output_dir: Path) -
             f"<td>{int(entry['unique_track_count'])}</td>"
             f"<td>{grouped_cell}</td>"
             f"<td>{raw_cell}</td>"
-            f"<td>{track_gallery_cell}</td>"
             "</tr>"
         )
 
@@ -1541,11 +1369,10 @@ def _write_queue_index(entries: list[dict[str, object]], run_output_dir: Path) -
         <th>Unique Tracks</th>
         <th>Grouped Preview</th>
         <th>Raw Preview</th>
-        <th>Track Gallery</th>
       </tr>
     </thead>
     <tbody>
-      {"".join(body_rows) if body_rows else '<tr><td colspan="8" class="empty">No processed videos yet.</td></tr>'}
+      {"".join(body_rows) if body_rows else '<tr><td colspan="7" class="empty">No processed videos yet.</td></tr>'}
     </tbody>
   </table>
 </body>
@@ -1574,7 +1401,6 @@ def _recover_video_output_from_crops(video_output_dir: Path) -> tuple[bool, str]
                 "preview": "",
                 "preview_crop_path": _format_output_path(crop_path),
                 "video_name": video_output_dir.name,
-                "queue_index": 1,
                 "track_id": track_id,
                 "segment_id": _segment_id(track_id, segment_index),
                 "image_id_start": image_id,
@@ -1596,11 +1422,6 @@ def _recover_video_output_from_crops(video_output_dir: Path) -> tuple[bool, str]
         f"{video_output_dir.name} · Recovered Grouped Preview",
         rows,
         video_output_dir / "recovered_from_crops",
-    )
-    _write_preview_export_directory(
-        f"{video_output_dir.name} · Recovered Track Gallery",
-        _build_track_gallery_rows(rows),
-        video_output_dir / "recovered_from_crops" / "track_gallery",
     )
     return True, f"Recovered HTML written to `{html_path}`."
 
@@ -1687,11 +1508,6 @@ def _recover_video_output_from_csv(video_output_dir: Path) -> tuple[bool, str]:
         f"{video_output_dir.name} · Recovered Raw Preview (Top 200 Rows)",
         raw_preview_rows,
         video_output_dir / "recovered_from_csv" / "raw_preview",
-    )
-    _write_preview_export_directory(
-        f"{video_output_dir.name} · Recovered Track Gallery",
-        _build_track_gallery_rows(grouped_preview_rows),
-        video_output_dir / "recovered_from_csv" / "track_gallery",
     )
     return True, f"Recovered HTML from `{csv_path}`."
 
@@ -1790,13 +1606,7 @@ def _render_preview_table(
 
     preview_column = "preview"
     df = pd.DataFrame(rows)
-    if preview_column in df.columns:
-        df[preview_column] = [
-            str(row.get(preview_column) or "").strip()
-            or _crop_path_to_data_url(_preview_crop_path_from_row(row))
-            for row in rows
-        ]
-    display_columns = [column for column in df.columns if column != "preview_crop_path"]
+    display_columns = [column for column in df.columns if column not in _PREVIEW_HIDDEN_COLUMNS]
     preview_available = preview_column in df.columns and df[preview_column].fillna("").astype(str).ne("").any()
     dataframe_kwargs: dict[str, object] = {
         "data": df[display_columns],
@@ -1877,7 +1687,6 @@ def _render_tracking_exports(
         )
 
     grouped_preview_rows, raw_preview_rows = _build_preview_rows(successful)
-    track_gallery_rows = _build_track_gallery_rows(grouped_preview_rows)
     raw_preview_export_rows = raw_preview_rows[:200]
     grouped_preview_zip = _build_preview_export_zip(
         "Grouped Preview",
@@ -1888,11 +1697,6 @@ def _render_tracking_exports(
         "Raw Preview (Top 200 Rows)",
         raw_preview_export_rows,
         archive_root_name="tracking_raw_preview",
-    )
-    track_gallery_zip = _build_preview_export_zip(
-        "Track Gallery",
-        track_gallery_rows,
-        archive_root_name="tracking_track_gallery",
     )
 
     with st.expander("📦 Tracking Export", expanded=True):
@@ -1906,7 +1710,6 @@ def _render_tracking_exports(
             st.caption(f"Local output folder: `{_format_output_path(output_dir)}`")
             (output_dir / "tracking_grouped_preview_html.zip").write_bytes(grouped_preview_zip)
             (output_dir / "tracking_raw_preview_html.zip").write_bytes(raw_preview_zip)
-            (output_dir / "tracking_track_gallery_html.zip").write_bytes(track_gallery_zip)
 
         st.download_button(
             "⬇️ Download All Tracking CSV",
@@ -1949,28 +1752,6 @@ def _render_tracking_exports(
             mime="application/zip",
             key="download_tracking_raw_preview_zip",
             on_click="ignore",
-        )
-
-        st.download_button(
-            "⬇️ Download Track Gallery HTML (.zip)",
-            data=track_gallery_zip,
-            file_name="tracking_track_gallery_html.zip",
-            mime="application/zip",
-            key="download_tracking_track_gallery_zip",
-            on_click="ignore",
-        )
-
-        _render_preview_table(
-            "Track Gallery",
-            track_gallery_rows,
-            key="tracking_track_gallery_table",
-            preview_caption_columns=[
-                "video_name",
-                "track_id",
-                "class_name",
-                "first_seen",
-                "last_seen",
-            ],
         )
 
         _render_preview_table(
@@ -2037,7 +1818,6 @@ def render(
 
     # Tracking options (enabled by default)
     enable_tracking, tracker = _tracker_options()
-    tracking_runtime_mode = _tracking_runtime_mode_options(enable_tracking)
 
     # Skip frames slider for faster inference
     skip_frames = st.sidebar.slider(
@@ -2073,7 +1853,6 @@ def render(
         selected_model,
         resolved_device,
         perf,
-        tracking_runtime_mode,
     )
 
 
@@ -2137,50 +1916,6 @@ def _tracker_options() -> tuple[bool, str | None]:
     return enable, tracker
 
 
-def _tracking_runtime_mode_options(enable_tracking: bool) -> str:
-    if not enable_tracking:
-        return config.DEFAULT_TRACK_RUNTIME_MODE
-
-    default_index = config.TRACK_RUNTIME_MODES.index(config.DEFAULT_TRACK_RUNTIME_MODE)
-    return st.sidebar.radio(
-        "Tracking Runtime Mode",
-        config.TRACK_RUNTIME_MODES,
-        index=default_index,
-        help=(
-            "Fast keeps long-running streams stable by pruning live tracking state and "
-            "reducing live HTML snapshot writes. Full keeps the previous unbounded behavior."
-        ),
-        key="tracking_runtime_mode",
-    )
-
-
-def _tracking_runtime_options(
-    tracking_runtime_mode: str,
-    *,
-    has_output_dir: bool,
-) -> _TrackingRuntimeOptions:
-    mode = (
-        tracking_runtime_mode
-        if tracking_runtime_mode in config.TRACK_RUNTIME_MODES
-        else config.DEFAULT_TRACK_RUNTIME_MODE
-    )
-    fast_mode = mode == config.TRACK_RUNTIME_FAST
-    keep_full_history = has_output_dir or not fast_mode
-    return _TrackingRuntimeOptions(
-        mode=mode,
-        keep_full_history=keep_full_history,
-        live_export_interval_s=(
-            config.TRACK_LIVE_EXPORT_INTERVAL_FAST_S
-            if fast_mode
-            else config.TRACK_LIVE_EXPORT_INTERVAL_FULL_S
-        ),
-        eager_live_snapshot_on_new_crop=not fast_mode,
-        recent_track_window_frames=(
-            None if keep_full_history else config.FAST_TRACKING_RETENTION_FRAMES
-        ),
-    )
-
-
 # ── Frame processor ──────────────────────────────────────────────────────────
 
 
@@ -2192,8 +1927,8 @@ def _process_frame(
     perf: _PerformanceOptions,
     enable_tracking: bool,
     tracker: str | None,
-    tracking_state: _TrackingMetricsState | None,
-    frame_num: int,
+    tracked_ids: set[int],
+    class_tracked: dict[str, set[int]],
     render_output: bool = True,
 ) -> tuple[np.ndarray | None, int, dict[str, int], list[_TrackObservation]]:
     """Run inference on a single frame.
@@ -2241,9 +1976,9 @@ def _process_frame(
         if enable_tracking and result.boxes.id is not None:
             ids = result.boxes.id.cpu().numpy()
             for track_id, cls_id, conf, box_xyxy in zip(ids, classes, confs, boxes_xyxy):
+                tracked_ids.add(int(track_id))
                 name = names[int(cls_id)]
-                if tracking_state is not None:
-                    tracking_state.observe(int(track_id), name, frame_num)
+                class_tracked.setdefault(name, set()).add(int(track_id))
                 observations.append(
                     _TrackObservation(
                         track_id=int(track_id),
@@ -2252,9 +1987,6 @@ def _process_frame(
                         bbox_xyxy=tuple(int(v) for v in box_xyxy),
                     )
                 )
-
-    if tracking_state is not None:
-        tracking_state.prune(frame_num)
 
     if not render_output:
         return None, frame_obj_count, frame_class_counts, observations
@@ -2267,8 +1999,8 @@ def _process_frame(
         annotated,
         frame_obj_count,
         frame_class_counts,
-        tracking_state.tracked_total if enable_tracking and tracking_state is not None else None,
-        tracking_state.class_tracked if enable_tracking and tracking_state is not None else None,
+        len(tracked_ids) if enable_tracking else None,
+        class_tracked if enable_tracking else None,
     )
     annotated = _resize_for_display(annotated)
     return annotated, frame_obj_count, frame_class_counts, observations
@@ -2415,7 +2147,6 @@ def _run_video_loop(
     save_track_crops: bool = False,
     skip_frames: int = 1,
     persist_live_tracking: bool = False,
-    tracking_runtime_mode: str = config.DEFAULT_TRACK_RUNTIME_MODE,
 ) -> _VideoRunResult:
     """Common processing loop for any ``cv2.VideoCapture`` source."""
     output_run_dir = video_output_dir.parent if video_output_dir is not None else None
@@ -2438,19 +2169,8 @@ def _run_video_loop(
 
     metrics = metrics or _LiveMetrics(enable_tracking)
     st_frame = st_frame or st.empty()
-    tracking_runtime = _tracking_runtime_options(
-        tracking_runtime_mode,
-        has_output_dir=video_output_dir is not None,
-    )
-    tracking_state = (
-        _TrackingMetricsState(
-            retain_all_time=tracking_runtime.keep_full_history,
-            recent_window_frames=tracking_runtime.recent_track_window_frames,
-        )
-        if enable_tracking
-        else None
-    )
-    store_tracking_history = enable_tracking and tracking_runtime.keep_full_history
+    tracked_ids: set[int] = set()
+    class_tracked: dict[str, set[int]] = defaultdict(set)
     raw_events: list[_TrackingEvent] = []
     segment_runtime: dict[tuple[str, int, int], _TrackSegmentRuntime] = {}
     saved_crops: dict[tuple[str, int, int, int], _SavedCropInfo] = {}
@@ -2476,11 +2196,8 @@ def _run_video_loop(
         now_ts = time.time()
         if (
             not force
-            and now_ts - last_live_export_at < tracking_runtime.live_export_interval_s
-            and (
-                not tracking_runtime.eager_live_snapshot_on_new_crop
-                or len(saved_crops) == last_live_saved_crop_count
-            )
+            and len(saved_crops) == last_live_saved_crop_count
+            and now_ts - last_live_export_at < _TRACK_LIVE_EXPORT_INTERVAL_S
         ):
             return
         snapshot = _VideoRunResult(
@@ -2492,7 +2209,7 @@ def _run_video_loop(
             skipped_frames=max(frame_num - processed, 0),
             raw_events=raw_events,
             grouped_segments=_group_tracking_events(raw_events, saved_crops=saved_crops),
-            unique_track_count=tracking_state.tracked_total if tracking_state is not None else 0,
+            unique_track_count=len(tracked_ids),
             output_dir=_format_output_path(output_run_dir),
             saved_crop_count=sum(1 for crop_info in saved_crops.values() if crop_info.crop_path),
         )
@@ -2532,25 +2249,24 @@ def _run_video_loop(
                 perf,
                 enable_tracking,
                 tracker,
-                tracking_state,
-                frame_num,
+                tracked_ids,
+                class_tracked,
                 render_output=should_render,
             )
-            if store_tracking_history:
-                raw_events.extend(
-                    _build_tracking_events(
-                        observations,
-                        video_name=video_name,
-                        queue_index=queue_index,
-                        frame_num=frame_num,
-                        timestamp_ms=current_video_ms,
-                        frame=frame,
-                        segment_runtime=segment_runtime,
-                        saved_crops=saved_crops,
-                        save_track_crops=save_track_crops,
-                        crops_dir=crops_dir,
-                    )
+            raw_events.extend(
+                _build_tracking_events(
+                    observations,
+                    video_name=video_name,
+                    queue_index=queue_index,
+                    frame_num=frame_num,
+                    timestamp_ms=current_video_ms,
+                    frame=frame,
+                    segment_runtime=segment_runtime,
+                    saved_crops=saved_crops,
+                    save_track_crops=save_track_crops,
+                    crops_dir=crops_dir,
                 )
+            )
 
             if annotated is not None:
                 last_bytes = _frame_to_bytes(annotated)
@@ -2565,8 +2281,8 @@ def _run_video_loop(
                     frame_num,
                     obj_count,
                     cls_counts,
-                    tracking_state.tracked_total if tracking_state is not None else 0,
-                    tracking_state.class_tracked if tracking_state is not None else {},
+                    len(tracked_ids),
+                    class_tracked,
                     fps,
                     elapsed_detect_s=now - run_started,
                     current_video_ms=current_video_ms,
@@ -2586,16 +2302,14 @@ def _run_video_loop(
     if skipped:
         summary_parts.append(f"**{skipped}** skipped")
 
-    tracked_total = tracking_state.tracked_total if tracking_state is not None else 0
-    tracked_classes = tracking_state.class_tracked if tracking_state is not None else {}
-    if enable_tracking and tracked_total:
+    if enable_tracking and tracked_ids:
         st.success(
             f"✅ **{video_name}** · {' · '.join(summary_parts)} — "
-            f"**{tracked_total}** unique objects tracked"
+            f"**{len(tracked_ids)}** unique objects tracked"
         )
         with st.expander("📊 Tracking Summary", expanded=True):
-            cols = st.columns(min(len(tracked_classes), 4) or 1)
-            for idx, (name, ids) in enumerate(tracked_classes.items()):
+            cols = st.columns(min(len(class_tracked), 4) or 1)
+            for idx, (name, ids) in enumerate(class_tracked.items()):
                 cols[idx % len(cols)].metric(name.capitalize(), len(ids))
     else:
         st.success(f"✅ **{video_name}** · {' · '.join(summary_parts)}")
@@ -2610,7 +2324,7 @@ def _run_video_loop(
         skipped_frames=skipped,
         raw_events=raw_events,
         grouped_segments=grouped_segments,
-        unique_track_count=tracked_total,
+        unique_track_count=len(tracked_ids),
         output_dir=_format_output_path(output_run_dir),
         saved_crop_count=sum(1 for crop_info in saved_crops.values() if crop_info.crop_path),
     )
@@ -2639,7 +2353,6 @@ def _run_multi_video_loop(
     task: str,
     world_classes: list[str] | None,
     selected_model: str | None = None,
-    tracking_runtime_mode: str = config.DEFAULT_TRACK_RUNTIME_MODE,
 ) -> None:
     """Process multiple videos simultaneously in side-by-side columns.
 
@@ -2666,16 +2379,9 @@ def _run_multi_video_loop(
                 placeholders.append(st.empty())
 
     captures = [cv2.VideoCapture(str(videos[nm])) for nm in vid_names]
-    tracking_runtime = _tracking_runtime_options(
-        tracking_runtime_mode,
-        has_output_dir=False,
-    )
-    tracking_states = [
-        _TrackingMetricsState(
-            retain_all_time=tracking_runtime.keep_full_history,
-            recent_window_frames=tracking_runtime.recent_track_window_frames,
-        )
-        for _ in range(n)
+    tracked_sets: list[set[int]] = [set() for _ in range(n)]
+    class_tracked_dicts: list[dict[str, set[int]]] = [
+        defaultdict(set) for _ in range(n)
     ]
     frame_nums = [0] * n
     processed_counts = [0] * n
@@ -2724,8 +2430,8 @@ def _run_multi_video_loop(
                     perf,
                     enable_tracking,
                     tracker,
-                    tracking_states[i],
-                    frame_nums[i],
+                    tracked_sets[i],
+                    class_tracked_dicts[i],
                     render_output=should_render,
                 )
 
@@ -2740,7 +2446,7 @@ def _run_multi_video_loop(
                 if should_render:
                     metric_phs[i].markdown(
                         f"**{vid_names[i]}** — Frame {frame_nums[i]} · "
-                        f"{obj_count} obj · {tracking_states[i].tracked_total} tracked · "
+                        f"{obj_count} obj · {len(tracked_sets[i])} tracked · "
                         f"{fps:.1f} FPS"
                     )
     finally:
@@ -2749,10 +2455,10 @@ def _run_multi_video_loop(
 
     # Per-video summary
     for i, name in enumerate(vid_names):
-        tracked_total = tracking_states[i].tracked_total
+        t = tracked_sets[i]
         st.success(
             f"✅ **{name}**: {frame_nums[i]} frames"
-            + (f" — **{tracked_total}** unique objects" if tracked_total else "")
+            + (f" — **{len(t)}** unique objects" if t else "")
         )
 
 
@@ -2770,7 +2476,6 @@ def _run_video_queue(
     selected_model: str | None = None,
     run_output_dir: Path | None = None,
     save_track_crops: bool = False,
-    tracking_runtime_mode: str = config.DEFAULT_TRACK_RUNTIME_MODE,
 ) -> list[_VideoRunResult]:
     """Run stored videos sequentially and collect exportable tracking results."""
     results: list[_VideoRunResult] = []
@@ -2825,7 +2530,6 @@ def _run_video_queue(
             save_track_crops=save_track_crops,
             skip_frames=skip_frames,
             persist_live_tracking=enable_tracking and video_dir is not None,
-            tracking_runtime_mode=tracking_runtime_mode,
         )
         if enable_tracking and video_dir is not None:
             _persist_video_tracking_outputs(result, video_dir, live=False, write_archives=True)
@@ -2866,7 +2570,6 @@ def _play_stored_video(
     selected_model: str | None = None,
     device: str = config.DEVICE_CPU,
     perf: _PerformanceOptions | None = None,
-    tracking_runtime_mode: str = config.DEFAULT_TRACK_RUNTIME_MODE,
 ) -> None:
     default_video_path = _format_output_path(config.VIDEOS_DIR) or str(config.VIDEOS_DIR)
     selected_video_path = st.sidebar.text_input(
@@ -3006,7 +2709,6 @@ def _play_stored_video(
                 save_track_crops=save_track_crops,
                 skip_frames=skip_frames,
                 persist_live_tracking=enable_tracking and video_dir is not None,
-                tracking_runtime_mode=tracking_runtime_mode,
             )
             if enable_tracking and video_dir is not None:
                 _persist_video_tracking_outputs(result, video_dir, live=False, write_archives=True)
@@ -3029,7 +2731,6 @@ def _play_stored_video(
                 selected_model,
                 run_output_dir=run_output_dir,
                 save_track_crops=save_track_crops,
-                tracking_runtime_mode=tracking_runtime_mode,
             )
             _render_queue_output_summary(results, run_output_dir)
             return
@@ -3046,7 +2747,6 @@ def _play_stored_video(
                 video_name=vid_names[0],
                 save_track_crops=False,
                 skip_frames=skip_frames,
-                tracking_runtime_mode=tracking_runtime_mode,
             )
         else:
             _run_multi_video_loop(
@@ -3061,7 +2761,6 @@ def _play_stored_video(
                 task,
                 world_classes,
                 selected_model,
-                tracking_runtime_mode,
             )
             st.info(
                 "Tracking export and grouped time ranges are available in Single Video "
@@ -3080,7 +2779,6 @@ def _play_webcam(
     selected_model: str | None = None,
     device: str = config.DEVICE_CPU,
     perf: _PerformanceOptions | None = None,
-    tracking_runtime_mode: str = config.DEFAULT_TRACK_RUNTIME_MODE,
 ) -> None:
     """Browser-based webcam via streamlit-webrtc (works locally + cloud)."""
     try:
@@ -3098,18 +2796,8 @@ def _play_webcam(
         "Your browser will ask for camera permission — please allow it."
     )
 
-    tracking_runtime = _tracking_runtime_options(
-        tracking_runtime_mode,
-        has_output_dir=False,
-    )
-    tracking_state = (
-        _TrackingMetricsState(
-            retain_all_time=tracking_runtime.keep_full_history,
-            recent_window_frames=tracking_runtime.recent_track_window_frames,
-        )
-        if enable_tracking
-        else None
-    )
+    tracked_ids_global: set[int] = set()
+    class_tracked_global: dict[str, set[int]] = defaultdict(set)
     runtime_perf = perf or _performance_options(device)
 
     class YOLOVideoProcessor(VideoProcessorBase):
@@ -3171,12 +2859,9 @@ def _play_webcam(
                 if enable_tracking and result.boxes.id is not None:
                     ids = result.boxes.id.cpu().numpy()
                     for track_id, cls_id in zip(ids, classes):
+                        tracked_ids_global.add(int(track_id))
                         name = names[int(cls_id)]
-                        if tracking_state is not None:
-                            tracking_state.observe(int(track_id), name, self.frame_count)
-
-            if tracking_state is not None:
-                tracking_state.prune(self.frame_count)
+                        class_tracked_global.setdefault(name, set()).add(int(track_id))
 
             if not should_render and self.last_annotated is not None:
                 return av.VideoFrame.from_ndarray(self.last_annotated, format="bgr24")
@@ -3186,8 +2871,8 @@ def _play_webcam(
                 annotated,
                 len(result.boxes) if result.boxes is not None else 0,
                 frame_class_counts,
-                tracking_state.tracked_total if enable_tracking and tracking_state is not None else None,
-                tracking_state.class_tracked if enable_tracking and tracking_state is not None else None,
+                len(tracked_ids_global) if enable_tracking else None,
+                class_tracked_global if enable_tracking else None,
             )
             annotated = _resize_for_display(annotated)
             self.last_annotated = annotated
@@ -3212,7 +2897,6 @@ def _play_rtsp(
     selected_model: str | None = None,
     device: str = config.DEVICE_CPU,
     perf: _PerformanceOptions | None = None,
-    tracking_runtime_mode: str = config.DEFAULT_TRACK_RUNTIME_MODE,
 ) -> None:
     url = st.sidebar.text_input(
         "RTSP Stream URL",
@@ -3232,7 +2916,6 @@ def _play_rtsp(
             tracker,
             video_name="RTSP Stream",
             skip_frames=skip_frames,
-            tracking_runtime_mode=tracking_runtime_mode,
         )
 
 
@@ -3247,7 +2930,6 @@ def _play_youtube(
     selected_model: str | None = None,
     device: str = config.DEVICE_CPU,
     perf: _PerformanceOptions | None = None,
-    tracking_runtime_mode: str = config.DEFAULT_TRACK_RUNTIME_MODE,
 ) -> None:
     url = st.sidebar.text_input(
         "YouTube URL", placeholder="https://www.youtube.com/watch?v=..."
@@ -3270,7 +2952,6 @@ def _play_youtube(
                 tracker,
                 video_name="YouTube Stream",
                 skip_frames=skip_frames,
-                tracking_runtime_mode=tracking_runtime_mode,
             )
         except Exception as exc:
             st.sidebar.error(f"YouTube error: {exc}")

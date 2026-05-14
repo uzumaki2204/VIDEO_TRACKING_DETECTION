@@ -17,8 +17,6 @@ ASSETS_DIR = ROOT / "assets"
 IMAGES_DIR = ROOT / "images"
 VIDEOS_DIR = ROOT / "videos"
 WEIGHTS_DIR = ROOT / "weights"
-OUTPUTS_DIR = ROOT / "outputs"
-TRACKING_RUNS_DIR = OUTPUTS_DIR / "tracking_runs"
 
 # Ensure weights directory exists
 WEIGHTS_DIR.mkdir(exist_ok=True)
@@ -129,67 +127,16 @@ DEFAULT_DETECT_IMAGE = IMAGES_DIR / "office_4_detected.jpg"
 
 # ─── Video Catalog ───────────────────────────────────────────────────────────
 _VIDEO_EXTENSIONS = ("*.mp4", "*.avi", "*.mkv", "*.mov", "*.wmv", "*.webm")
-_VIDEO_SUFFIXES = {Path(pattern).suffix.lower() for pattern in _VIDEO_EXTENSIONS}
 
 
-def resolve_video_path(path_value: str | Path | None = None) -> Path:
-    """Resolve a video directory/file path from user input.
-
-    Empty input falls back to the default ``videos/`` directory.
-    Relative paths are resolved from the project root.
-    """
-    if path_value is None:
-        return VIDEOS_DIR
-
-    raw = str(path_value).strip()
-    if not raw:
-        return VIDEOS_DIR
-
-    candidate = Path(raw).expanduser()
-    if not candidate.is_absolute():
-        candidate = ROOT / candidate
-    return candidate.resolve()
-
-
-def _video_label(path: Path, used_labels: set[str]) -> str:
-    """Return a stable unique label for one discovered video file."""
-    label = path.stem
-    if label not in used_labels:
-        used_labels.add(label)
-        return label
-
-    label = path.name
-    if label not in used_labels:
-        used_labels.add(label)
-        return label
-
-    suffix = 2
-    while True:
-        candidate = f"{path.stem} ({suffix})"
-        if candidate not in used_labels:
-            used_labels.add(candidate)
-            return candidate
-        suffix += 1
-
-
-def get_videos_dict(path_value: str | Path | None = None) -> dict[str, Path]:
-    """Scan a video directory or use a single video file if provided."""
-    target = resolve_video_path(path_value)
-    if not target.exists():
+def get_videos_dict() -> dict[str, Path]:
+    """Scan ``videos/`` directory each time so newly added files appear."""
+    if not VIDEOS_DIR.exists():
         return {}
-
     vids: dict[str, Path] = {}
-    used_labels: set[str] = set()
-
-    if target.is_file():
-        if target.suffix.lower() not in _VIDEO_SUFFIXES:
-            return {}
-        vids[_video_label(target, used_labels)] = target
-        return vids
-
     for ext in _VIDEO_EXTENSIONS:
-        for p in sorted(target.glob(ext)):
-            vids[_video_label(p, used_labels)] = p
+        for p in sorted(VIDEOS_DIR.glob(ext)):
+            vids[p.stem] = p
     return dict(sorted(vids.items()))
 
 
@@ -215,39 +162,24 @@ DEFAULT_UI_UPDATE_INTERVAL_CPU = 1
 DEFAULT_UI_UPDATE_INTERVAL_GPU = 4
 
 # ─── Skip Frames ─────────────────────────────────────────────────────────────
-DEFAULT_SKIP_FRAMES = 15  # process every frame
+DEFAULT_SKIP_FRAMES = 1  # process every frame
 MIN_SKIP_FRAMES = 1
-MAX_SKIP_FRAMES = 30
-
-# ─── Tracking Crop Output ─────────────────────────────────────────────────────
-DEFAULT_SAVE_TRACK_CROPS = True
-TRACK_CROP_EXTENSION = ".jpg"
+MAX_SKIP_FRAMES = 8
 
 # ─── Tracker Config ──────────────────────────────────────────────────────────
 TRACKER_BYTETRACK = "bytetrack.yaml"
 TRACKER_BOTSORT = "botsort.yaml"
 TRACKERS_LIST = [TRACKER_BYTETRACK, TRACKER_BOTSORT]
-TRACK_GROUP_GAP_MS = 3000
-
-# ─── Tracking Runtime ─────────────────────────────────────────────────────────
-TRACK_RUNTIME_FAST = "Fast"
-TRACK_RUNTIME_FULL = "Full"
-TRACK_RUNTIME_MODES = [TRACK_RUNTIME_FAST, TRACK_RUNTIME_FULL]
-DEFAULT_TRACK_RUNTIME_MODE = TRACK_RUNTIME_FAST
-TRACK_LIVE_EXPORT_INTERVAL_FAST_S = 90.0
-TRACK_LIVE_EXPORT_INTERVAL_FULL_S = 30.0
-FAST_TRACKING_RETENTION_FRAMES = 1800
+TRACK_GROUP_GAP_MS = 1000
 
 # ─── YOLO World v2 Defaults ───────────────────────────────────────────────────
 # Supports natural language prompts like "person in black", "red car", etc.
-# DEFAULT_WORLD_CLASSES = "person, car, dog, cat, chair, table, laptop, phone"
-DEFAULT_WORLD_CLASSES = "person"
+DEFAULT_WORLD_CLASSES = "person, car, dog, cat, chair, table, laptop, phone"
 
 # ─── YOLOE Defaults ──────────────────────────────────────────────────────────
 # YOLOE supports category-level text prompts (NOT descriptive phrases).
 # Unlike YOLO World v2, YOLOE provides detection + segmentation masks.
-# DEFAULT_YOLOE_CLASSES = "person, car, dog, cat, chair, table, laptop, phone"
-DEFAULT_YOLOE_CLASSES = "person"
+DEFAULT_YOLOE_CLASSES = "person, car, dog, cat, chair, table, laptop, phone"
 
 
 def resolve_model_path(model_name: str) -> str:
